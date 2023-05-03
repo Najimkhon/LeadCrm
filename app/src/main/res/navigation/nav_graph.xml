@@ -9,5 +9,5 @@
         android:id="@+id/homeFragment"
         android:name="com.example.leadcrm.ui.fragments.LeadListFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_lead_list" />
 </navigation>
