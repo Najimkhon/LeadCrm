@@ -16,4 +16,8 @@
     <color name="step_blue">#122AFF</color>
     <color name="icon_purple_bg">#B1AAFF</color>
     <color name="disabled_button_icon_color">#DFE3FF</color>
+    <color name="edit_text_border_color">#EDEDF3</color>
+    <color name="edit_text_label_color">#A0A1B5</color>
+    <color name="edit_text_hint_color">#C8C9D9</color>
+    <color name="error_color">#FEAEA4</color>
 </resources>

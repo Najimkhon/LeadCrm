@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:clipToPadding="false"
+    android:orientation="vertical"
     tools:context=".ui.fragments.LeadProfileFragment">
 
     <FrameLayout
@@ -37,70 +39,99 @@
             android:background="@color/divider_color" />
     </FrameLayout>
 
-    <FrameLayout
-        android:id="@+id/profileImgContainer"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-        <ImageView
-            android:id="@+id/ivProfile"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/yellow_profile_bg" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="JH"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-    </FrameLayout>
-
-    <TextView
-        android:id="@+id/tvName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:text="James Hetfield"
-        android:textColor="@color/dark_blue"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toRightOf="@+id/profileImgContainer"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/profileImgContainer" />
-
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="ID: 65464"
-        android:textColor="@color/grey"
-        android:textSize="16sp"
-        app:layout_constraintLeft_toLeftOf="@+id/tvName"
-        app:layout_constraintLeft_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvName" />
-
-    <include
-        android:id="@+id/progressBar"
-        layout="@layout/progress_bar"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="12dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/profileImgContainer" />
+        android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/buttonsChain"
-        layout="@layout/buttons_chain"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="14dp"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:id="@+id/profileImgContainer"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/ivProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/yellow_profile_bg" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="JH"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:text="James Hetfield"
+                android:textColor="@color/dark_blue"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toRightOf="@+id/profileImgContainer"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/profileImgContainer" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="ID: 65464"
+                android:textColor="@color/grey"
+                android:textSize="16sp"
+                app:layout_constraintLeft_toLeftOf="@+id/tvName"
+                app:layout_constraintLeft_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+            <include
+                android:id="@+id/progressBar"
+                layout="@layout/progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/profileImgContainer" />
+
+            <include
+                android:id="@+id/buttonsChain"
+                layout="@layout/buttons_chain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="14dp"
+                app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+
+            <include
+                android:id="@+id/generaInfoForm"
+                layout="@layout/general_info_form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="14dp"
+                app:layout_constraintTop_toBottomOf="@id/buttonsChain" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:text="Tags and Interests"
+                android:textColor="@color/dark_blue"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/generaInfoForm" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

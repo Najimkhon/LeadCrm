@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/tvGeneralInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="27dp"
+        android:text="General Info"
+        android:textColor="@color/dark_blue"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginLeft="8dp"
+        android:src="@drawable/ic_edit"
+        app:layout_constraintBottom_toBottomOf="@id/tvGeneralInfo"
+        app:layout_constraintLeft_toRightOf="@id/tvGeneralInfo"
+        app:layout_constraintTop_toTopOf="@id/tvGeneralInfo" />
+
+    <com.example.leadcrm.ui.customviews.EditTextCustomView
+        android:id="@+id/etLeadType"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        app:hint="Unknown"
+        app:label="Lead type"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/etAdSource"
+        app:layout_constraintTop_toBottomOf="@id/tvGeneralInfo" />
+
+    <com.example.leadcrm.ui.customviews.EditTextCustomView
+        android:id="@+id/etAdSource"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        app:hint="Unknown"
+        app:label="Ad-Source"
+        app:layout_constraintLeft_toRightOf="@id/etLeadType"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvGeneralInfo" />
+
+    <com.example.leadcrm.ui.customviews.EditTextCustomView
+        android:id="@+id/etCountry"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        app:hint="Unknown"
+        app:label="Country"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/etWebSource"
+        app:layout_constraintTop_toBottomOf="@id/etAdSource" />
+
+    <com.example.leadcrm.ui.customviews.EditTextCustomView
+        android:id="@+id/etWebSource"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        app:hint="Unknown"
+        app:label="Web-Source"
+        app:layout_constraintLeft_toRightOf="@id/etCountry"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etAdSource" />
+
+    <com.example.leadcrm.ui.customviews.EditTextCustomView
+        android:id="@+id/etCity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        app:hint="Unknown"
+        app:label="City/Region"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/etChannel"
+        app:layout_constraintTop_toBottomOf="@id/etCountry" />
+
+    <com.example.leadcrm.ui.customviews.EditTextCustomView
+        android:id="@+id/etChannel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        app:hint="Unknown"
+        app:label="Channel-Source"
+        app:layout_constraintLeft_toRightOf="@id/etCity"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etCountry" />
+
+    <com.example.leadcrm.ui.customviews.EditTextCustomView
+        android:id="@+id/etLanguage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        app:hint="Unknown"
+        app:label="City/Language"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/etProperty"
+        app:layout_constraintTop_toBottomOf="@id/etCity" />
+
+    <com.example.leadcrm.ui.customviews.EditTextCustomView
+        android:id="@+id/etProperty"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        app:hint="Unknown"
+        app:label="Property type"
+        app:layout_constraintLeft_toRightOf="@id/etLanguage"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etCity" />
+
+    <com.example.leadcrm.ui.customviews.EditTextCustomView
+        android:id="@+id/etNationality"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        app:hint="Unknown"
+        app:label="Nationality"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/etBirthday"
+        app:layout_constraintTop_toBottomOf="@id/etLanguage" />
+
+    <com.example.leadcrm.ui.customviews.EditTextCustomView
+        android:id="@+id/etBirthday"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        app:hint="Unknown"
+        app:label="Birth day"
+        app:layout_constraintLeft_toRightOf="@id/etNationality"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etLanguage" />
+
+    <com.example.leadcrm.ui.customviews.EditTextCustomView
+        android:id="@+id/etBudget"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="10dp"
+        app:hint="From 0- to 0"
+        app:label="Budget"
+        app:layout_constraintTop_toBottomOf="@id/etNationality" />
+
+    <com.example.leadcrm.ui.customviews.EditTextCustomView
+        android:id="@+id/etLocation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="10dp"
+        app:hint="Dubai Creek Harbour (The Lagoons)"
+        app:label="Location"
+        app:layout_constraintTop_toBottomOf="@id/etBudget" />
+
+    <com.example.leadcrm.ui.customviews.EditTextCustomView
+        android:id="@+id/etCityProperty"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        app:hint="Unknown"
+        app:label="City/Region"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/etChannelProperty"
+        app:layout_constraintTop_toBottomOf="@id/etLocation" />
+
+    <com.example.leadcrm.ui.customviews.EditTextCustomView
+        android:id="@+id/etChannelProperty"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        app:hint="Unknown"
+        app:label="Channel-Source"
+        app:layout_constraintLeft_toRightOf="@id/etCityProperty"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etLocation" />
+
+    <com.example.leadcrm.ui.customviews.EditTextCustomView
+        android:id="@+id/etLanguageProperty"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        app:hint="Unknown"
+        app:label="City/Language"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/etPropertyTypeSecond"
+        app:layout_constraintTop_toBottomOf="@id/etCityProperty" />
+
+    <com.example.leadcrm.ui.customviews.EditTextCustomView
+        android:id="@+id/etPropertyTypeSecond"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        app:hint="Unknown"
+        app:label="Property type"
+        app:layout_constraintLeft_toRightOf="@id/etLanguageProperty"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etCityProperty" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
