@@ -11,4 +11,7 @@
     <color name="divider_color">#F5F5F8</color>
     <color name="dark_blue">#00022F</color>
     <color name="blue">#6355FF</color>
+    <color name="indicator_blue">#00A3FF</color>
+    <color name="step_grey">#EDEDF3</color>
+    <color name="step_blue">#122AFF</color>
 </resources>

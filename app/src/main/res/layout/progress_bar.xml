@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/progress_bar_bg"
+    android:clipChildren="false"
+    android:clipToOutline="false"
+    android:padding="14dp">
+
+    <TextView
+        android:id="@+id/tvStatusLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lead status:"
+        android:textColor="@color/grey"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivFrontArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_forward_arrow"
+        app:layout_constraintBottom_toBottomOf="@id/tvOptionsLabel"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvOptionsLabel" />
+
+    <TextView
+        android:id="@+id/tvOptionsLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:text="Options sent"
+        android:textColor="@color/dark_blue"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/tvStatusLabel"
+        app:layout_constraintRight_toLeftOf="@+id/ivFrontArrow"
+        app:layout_constraintTop_toTopOf="@id/tvStatusLabel" />
+
+    <View
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/indicator"
+        app:layout_constraintBottom_toBottomOf="@id/tvOptionsLabel"
+        app:layout_constraintRight_toLeftOf="@id/tvOptionsLabel"
+        app:layout_constraintTop_toTopOf="@id/tvOptionsLabel" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvStatusLabel">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="9dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/completed_step"
+            android:elevation="4dp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="9dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/completed_step"
+            android:elevation="4dp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="9dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/completed_step"
+            android:elevation="4dp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="9dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/completed_step"
+            android:elevation="4dp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="9dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/step" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="9dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/step" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="9dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/step" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="9dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/step" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

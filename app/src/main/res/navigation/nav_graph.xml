@@ -9,4 +9,14 @@
         android:name="com.example.leadcrm.ui.fragments.LeadListFragment"
         android:label="fragment_lead_list"
         tools:layout="@layout/fragment_lead_list" />
+    <fragment
+        android:id="@+id/addLeadFragment"
+        android:name="com.example.leadcrm.ui.fragments.AddLeadFragment"
+        android:label="fragment_add_lead"
+        tools:layout="@layout/fragment_add_lead" />
+    <fragment
+        android:id="@+id/leadProfileFragment"
+        android:name="com.example.leadcrm.ui.fragments.LeadProfileFragment"
+        android:label="fragment_lead_profile"
+        tools:layout="@layout/fragment_lead_profile" />
 </navigation>
