@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clipToPadding="false"
-    android:padding="16dp">
+    android:paddingTop="12dp">
 
     <ImageView
         android:id="@+id/btnCall"
@@ -15,7 +15,6 @@
         android:elevation="8dp"
         android:padding="15dp"
         android:src="@drawable/ic_call"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/btnMessage"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,7 +28,6 @@
         android:textColor="@color/blue"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@+id/btnCall"
         app:layout_constraintRight_toRightOf="@id/btnCall"
         app:layout_constraintTop_toBottomOf="@+id/btnCall" />
@@ -43,7 +41,6 @@
         android:elevation="8dp"
         android:padding="15dp"
         android:src="@drawable/ic_message"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/btnCall"
         app:layout_constraintRight_toLeftOf="@+id/btnMail"
         app:layout_constraintTop_toTopOf="parent" />
@@ -57,7 +54,6 @@
         android:textColor="@color/blue"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/btnMessage"
         app:layout_constraintRight_toRightOf="@id/btnMessage"
         app:layout_constraintTop_toBottomOf="@id/btnMessage" />
@@ -71,7 +67,6 @@
         android:elevation="8dp"
         android:padding="15dp"
         android:src="@drawable/ic_mail"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/btnMessage"
         app:layout_constraintRight_toLeftOf="@+id/btnEvent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -85,7 +80,6 @@
         android:textColor="@color/disabled_button_icon_color"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/btnMail"
         app:layout_constraintRight_toRightOf="@id/btnMail"
         app:layout_constraintTop_toBottomOf="@id/btnMail" />
@@ -99,20 +93,19 @@
         android:elevation="8dp"
         android:padding="15dp"
         android:src="@drawable/ic_event"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/btnMail"
         app:layout_constraintRight_toLeftOf="@+id/btnMeeting"
         app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/tvEventLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
-        android:text="Follow up"
+        android:text="Follow-up"
         android:textColor="@color/disabled_button_icon_color"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/btnEvent"
         app:layout_constraintRight_toRightOf="@id/btnEvent"
         app:layout_constraintTop_toBottomOf="@id/btnEvent" />
@@ -126,7 +119,6 @@
         android:elevation="8dp"
         android:padding="15dp"
         android:src="@drawable/ic_meeting"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/btnEvent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -140,7 +132,6 @@
         android:textColor="@color/disabled_button_icon_color"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/btnMeeting"
         app:layout_constraintRight_toRightOf="@id/btnMeeting"
         app:layout_constraintTop_toBottomOf="@id/btnMeeting" />
