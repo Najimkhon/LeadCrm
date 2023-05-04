@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipToPadding="false"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/btnCall"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginRight="4dp"
+        android:background="@drawable/icon_purple_bg"
+        android:elevation="8dp"
+        android:padding="15dp"
+        android:src="@drawable/ic_call"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/btnMessage"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvCallLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:text="Call"
+        android:textColor="@color/blue"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/btnCall"
+        app:layout_constraintRight_toRightOf="@id/btnCall"
+        app:layout_constraintTop_toBottomOf="@+id/btnCall" />
+
+    <ImageView
+        android:id="@+id/btnMessage"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginRight="4dp"
+        android:background="@drawable/icon_purple_bg"
+        android:elevation="8dp"
+        android:padding="15dp"
+        android:src="@drawable/ic_message"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/btnCall"
+        app:layout_constraintRight_toLeftOf="@+id/btnMail"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvMessageLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:text="Message"
+        android:textColor="@color/blue"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/btnMessage"
+        app:layout_constraintRight_toRightOf="@id/btnMessage"
+        app:layout_constraintTop_toBottomOf="@id/btnMessage" />
+
+    <ImageView
+        android:id="@+id/btnMail"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginRight="4dp"
+        android:background="@drawable/icon_purple_bg"
+        android:elevation="8dp"
+        android:padding="15dp"
+        android:src="@drawable/ic_mail"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/btnMessage"
+        app:layout_constraintRight_toLeftOf="@+id/btnEvent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvMailLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:text="Mail"
+        android:textColor="@color/blue"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/btnMail"
+        app:layout_constraintRight_toRightOf="@id/btnMail"
+        app:layout_constraintTop_toBottomOf="@id/btnMail" />
+
+    <ImageView
+        android:id="@+id/btnEvent"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginRight="4dp"
+        android:background="@drawable/icon_purple_bg"
+        android:elevation="8dp"
+        android:padding="15dp"
+        android:src="@drawable/ic_event"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/btnMail"
+        app:layout_constraintRight_toLeftOf="@+id/btnMeeting"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/tvEventLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:text="Follow up"
+        android:textColor="@color/blue"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/btnEvent"
+        app:layout_constraintRight_toRightOf="@id/btnEvent"
+        app:layout_constraintTop_toBottomOf="@id/btnEvent" />
+
+    <ImageView
+        android:id="@+id/btnMeeting"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginRight="4dp"
+        android:background="@drawable/icon_purple_bg"
+        android:elevation="8dp"
+        android:padding="15dp"
+        android:src="@drawable/ic_meeting"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/btnEvent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvMeetingLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:text="Meeting"
+        android:textColor="@color/blue"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/btnMeeting"
+        app:layout_constraintRight_toRightOf="@id/btnMeeting"
+        app:layout_constraintTop_toBottomOf="@id/btnMeeting" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

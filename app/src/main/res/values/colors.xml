@@ -14,4 +14,5 @@
     <color name="indicator_blue">#00A3FF</color>
     <color name="step_grey">#EDEDF3</color>
     <color name="step_blue">#122AFF</color>
+    <color name="icon_purple_bg">#B1AAFF</color>
 </resources>

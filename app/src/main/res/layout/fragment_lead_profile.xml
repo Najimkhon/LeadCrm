@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.LeadProfileFragment">
+    tools:context=".ui.fragments.LeadProfileFragment"
+    android:clipToPadding="false">
 
     <FrameLayout
         android:id="@+id/toolbar"
@@ -89,9 +90,18 @@
         layout="@layout/progress_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/profileImgContainer"
+        android:layout_marginHorizontal="12dp"
         android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="12dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/profileImgContainer" />
+
+    <include
+        android:id="@+id/buttonsChain"
+        layout="@layout/buttons_chain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar"/>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
