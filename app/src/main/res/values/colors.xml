@@ -15,4 +15,5 @@
     <color name="step_grey">#EDEDF3</color>
     <color name="step_blue">#122AFF</color>
     <color name="icon_purple_bg">#B1AAFF</color>
+    <color name="disabled_button_icon_color">#DFE3FF</color>
 </resources>
