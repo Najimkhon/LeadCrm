@@ -20,4 +20,7 @@
     <color name="edit_text_label_color">#A0A1B5</color>
     <color name="edit_text_hint_color">#C8C9D9</color>
     <color name="error_color">#FEAEA4</color>
+    <color name="tag_bg_color">#EDEDF3</color>
+    <color name="tag_text_color">#6E6F89</color>
+    <color name="sub_header_color">#666782</color>
 </resources>
