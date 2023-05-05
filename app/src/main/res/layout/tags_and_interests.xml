@@ -28,16 +28,48 @@
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/tvTagsLabel" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.chip.ChipGroup
         android:id="@+id/tagMale"
-        style="@style/TagStyle"
+
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginLeft="18dp"
         android:layout_marginTop="6dp"
-        android:text="Male"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvDemographic" />
+        app:layout_constraintTop_toBottomOf="@id/tvDemographic">
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/ChipStyle"
+            android:textColor="@color/tag_text_color"
+            app:chipBackgroundColor="@color/tag_bg_color"
+            android:text="Tag name example"
+            />
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/ChipStyle"
+            android:textColor="@color/tag_text_color"
+            app:chipBackgroundColor="@color/tag_bg_color"
+            android:text="Tag name example"
+            />
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/ChipStyle"
+            android:textColor="@color/tag_text_color"
+            app:chipBackgroundColor="@color/tag_bg_color"
+            android:text="Tag name example"
+            />
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/ChipStyle"
+            android:textColor="@color/tag_text_color"
+            app:chipBackgroundColor="@color/tag_bg_color"
+            android:text="Tag name example"
+            />
+    </com.google.android.material.chip.ChipGroup>
 
     <TextView
         android:id="@+id/tvInterests"
@@ -64,16 +96,24 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvInterests" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.chip.ChipGroup
         android:id="@+id/tagExample"
-        style="@style/TagStyle"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginLeft="18dp"
         android:layout_marginTop="6dp"
-        android:text="Tag name example"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvLuxuryItems" />
+        app:layout_constraintTop_toBottomOf="@id/tvLuxuryItems">
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/ChipStyle"
+            android:textColor="@color/tag_text_color"
+            app:chipBackgroundColor="@color/tag_bg_color"
+            android:text="Tag name example"
+            />
+
+    </com.google.android.material.chip.ChipGroup>
 
     <TextView
         android:id="@+id/tvBusinessTags"
@@ -88,16 +128,24 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tagExample" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.chip.ChipGroup
         android:id="@+id/tagBusiness"
-        style="@style/TagStyle"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginLeft="18dp"
         android:layout_marginTop="6dp"
-        android:text="Tag name example"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvBusinessTags" />
+        app:layout_constraintTop_toBottomOf="@id/tvBusinessTags">
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/ChipStyle"
+            android:textColor="@color/tag_text_color"
+            app:chipBackgroundColor="@color/tag_bg_color"
+            android:text="Tag name example"
+            />
+
+    </com.google.android.material.chip.ChipGroup>
 
     <TextView
         android:id="@+id/tvEntertainmentTags"
@@ -112,15 +160,22 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tagBusiness" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.chip.ChipGroup
         android:id="@+id/tagEntertainment"
-        style="@style/TagStyle"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginLeft="18dp"
         android:layout_marginTop="6dp"
-        android:text="Tag name example"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvEntertainmentTags" />
+        app:layout_constraintTop_toBottomOf="@id/tvEntertainmentTags">
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/ChipStyle"
+            android:textColor="@color/tag_text_color"
+            app:chipBackgroundColor="@color/tag_bg_color"
+            android:text="Tag name example"
+            />
+    </com.google.android.material.chip.ChipGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
