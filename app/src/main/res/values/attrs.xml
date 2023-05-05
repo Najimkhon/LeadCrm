@@ -6,4 +6,9 @@
         <attr name="text" format="string" />
         <attr name="error" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="SpinnerCustomView">
+        <attr name="spinnerHint" format="string" />
+        <attr name="spinnerError" format="boolean"/>
+    </declare-styleable>
 </resources>

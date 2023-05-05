@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipToPadding="false"
-    tools:context=".ui.fragments.AddLeadFragment">
+    tools:context=".ui.fragments.AddLeadFragment"
+    android:background="@color/white">
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSave"
@@ -17,12 +18,21 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnCancel"
         style="@style/SecondaryButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="Cancel"
         app:layout_constraintTop_toBottomOf="@+id/btnSave" />
+
+
+    <com.example.leadcrm.ui.customviews.SpinnerCustomView
+        android:id="@+id/customSpinner"
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/btnCancel"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
