@@ -1,0 +1,13 @@
+query Query{
+    fetchLeads{
+        data{
+            firstName
+            lastName
+            createdAt
+            updatedAt
+            adSource{
+                title
+            }
+        }
+    }
+}
