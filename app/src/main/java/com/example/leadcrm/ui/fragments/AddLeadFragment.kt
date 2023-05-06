@@ -13,13 +13,17 @@ class AddLeadFragment : BaseFragment<FragmentAddLeadBinding>(FragmentAddLeadBind
 
     override fun assignObjects() {
         topicSpinnerAdapter = TopicSpinnerAdapter(requireContext())
-        binding.customSpinner.setAdapter(topicSpinnerAdapter)
+        binding.spLeadType.setAdapter(topicSpinnerAdapter)
+        binding.spCountry.setAdapter(topicSpinnerAdapter)
+        binding.spCity.setAdapter(topicSpinnerAdapter)
+        binding.spLanguage.setAdapter(topicSpinnerAdapter)
+        binding.spSource.setAdapter(topicSpinnerAdapter)
     }
 
     override fun setListeners() {
 
         binding.btnSave.setOnClickListener {
-            binding.customSpinner.showErrorState()
+            binding.spLeadType.showErrorState()
         }
     }
 

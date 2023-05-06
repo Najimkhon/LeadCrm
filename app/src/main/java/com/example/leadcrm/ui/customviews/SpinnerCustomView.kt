@@ -50,6 +50,9 @@ class SpinnerCustomView @JvmOverloads constructor(
             defStyleRes
         )
 
+        val hint = typedArray.getString(R.styleable.SpinnerCustomView_spinnerHint)
+        binding.tvLabel.text = hint
+
         val error = typedArray.getBoolean(R.styleable.SpinnerCustomView_spinnerError, false)
 
         if (error) {
