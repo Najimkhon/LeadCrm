@@ -7,13 +7,14 @@ import com.example.leadcrm.R
 import com.example.leadcrm.base.BaseFragment
 import com.example.leadcrm.databinding.FragmentLeadListBinding
 import com.example.leadcrm.ui.adapters.LeadAdapter
+import com.example.leadcrm.ui.layouts.LeadItemLayout
 import com.example.leadcrm.ui.viewmodels.LeadsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LeadListFragment : BaseFragment<FragmentLeadListBinding>(FragmentLeadListBinding::inflate) {
+class LeadListFragment : BaseFragment<FragmentLeadListBinding>(FragmentLeadListBinding::inflate), LeadItemLayout.OnClickListener {
     private val viewModel: LeadsViewModel by activityViewModels()
-    private val leadAdapter: LeadAdapter by lazy { LeadAdapter(requireContext()) }
+    private val leadAdapter: LeadAdapter by lazy { LeadAdapter(requireContext(), this) }
 
     override fun setObservers() {
         viewModel.getLeads()
@@ -38,6 +39,11 @@ class LeadListFragment : BaseFragment<FragmentLeadListBinding>(FragmentLeadListB
             adapter = leadAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
+    }
+
+    override fun onItemClicked(leadId: Int) {
+        val action = LeadListFragmentDirections.navigateToLeadProfile(leadId)
+        findNavController().navigate(action)
     }
 
 

@@ -13,7 +13,7 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class LeadItemLayout(context: Context) : RelativeLayout(context) {
+class LeadItemLayout(context: Context, private val listener: OnClickListener) : RelativeLayout(context) {
     private val binding = LeadItemLayoutBinding.inflate(LayoutInflater.from(context), this, true)
     private val isoFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
     private val dateFormatter = SimpleDateFormat("dd/MM/yyyy", Locale.US)
@@ -41,6 +41,9 @@ class LeadItemLayout(context: Context) : RelativeLayout(context) {
                 tvEmoji.text = lead.country.emoji
             } else {
                 tvEmoji.text = DEFAULT_EMOJI
+            }
+            itemView.setOnClickListener{
+                listener.onItemClicked(lead.id)
             }
         }
 
@@ -79,5 +82,9 @@ class LeadItemLayout(context: Context) : RelativeLayout(context) {
             chip.text = text
         }
         binding.adSources.addView(chip)
+    }
+
+    interface OnClickListener{
+        fun onItemClicked(leadId: Int)
     }
 }

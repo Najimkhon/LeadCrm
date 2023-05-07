@@ -25,5 +25,9 @@
         android:id="@+id/leadProfileFragment"
         android:name="com.example.leadcrm.ui.fragments.LeadProfileFragment"
         android:label="fragment_lead_profile"
-        tools:layout="@layout/fragment_lead_profile" />
+        tools:layout="@layout/fragment_lead_profile" >
+        <argument
+            android:name="leadId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

@@ -10,7 +10,8 @@ import com.example.graphql.LeadsQuery
 import com.example.leadcrm.ui.layouts.LeadItemLayout
 
 class LeadAdapter(
-    val context: Context
+    val context: Context,
+    private val listener: LeadItemLayout.OnClickListener
 ) : RecyclerView.Adapter<LeadAdapter.LeadViewHolder>() {
 
     val diffCallback = object : DiffUtil.ItemCallback<LeadsQuery.Data1>() {
@@ -35,7 +36,7 @@ class LeadAdapter(
     val differ = AsyncListDiffer(this, diffCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LeadViewHolder {
-        return LeadViewHolder(LeadItemLayout(context))
+        return LeadViewHolder(LeadItemLayout(context, listener))
     }
 
     override fun getItemCount(): Int {
