@@ -18,6 +18,9 @@ query Leads{
             adSource{
                 title
             }
+            country{
+                emoji
+            }
         }
     }
 }

@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat
 import com.example.graphql.LeadsQuery
 import com.example.leadcrm.R
 import com.example.leadcrm.databinding.LeadItemLayoutBinding
+import com.example.leadcrm.utils.Constants.DEFAULT_EMOJI
 import com.google.android.material.chip.Chip
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -36,6 +37,11 @@ class LeadItemLayout(context: Context) : RelativeLayout(context) {
             tvUpdatedDate.text = "Updated date: $updatedDate"
             tvName.text = lead.firstName + " " + lead.lastName
             tvProfileInitials.text = firstNameInit + lastNameInit
+            if (lead.country?.emoji != null){
+                tvEmoji.text = lead.country.emoji
+            }else{
+                tvEmoji.text = DEFAULT_EMOJI
+            }
         }
 
         setChipGroup(lead.adSource, lead.intention, lead.status, lead.channelSource)
