@@ -30,45 +30,44 @@
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/tagMale"
-
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginLeft="18dp"
         android:layout_marginTop="6dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvDemographic">
+
         <com.google.android.material.chip.Chip
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Tag name example"
             android:textAppearance="@style/ChipStyle"
             android:textColor="@color/tag_text_color"
-            app:chipBackgroundColor="@color/tag_bg_color"
-            android:text="Tag name example"
-            />
+            app:chipBackgroundColor="@color/tag_bg_color" />
+
         <com.google.android.material.chip.Chip
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Tag name example"
             android:textAppearance="@style/ChipStyle"
             android:textColor="@color/tag_text_color"
-            app:chipBackgroundColor="@color/tag_bg_color"
-            android:text="Tag name example"
-            />
+            app:chipBackgroundColor="@color/tag_bg_color" />
+
         <com.google.android.material.chip.Chip
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Tag name example"
             android:textAppearance="@style/ChipStyle"
             android:textColor="@color/tag_text_color"
-            app:chipBackgroundColor="@color/tag_bg_color"
-            android:text="Tag name example"
-            />
+            app:chipBackgroundColor="@color/tag_bg_color" />
+
         <com.google.android.material.chip.Chip
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Tag name example"
             android:textAppearance="@style/ChipStyle"
             android:textColor="@color/tag_text_color"
-            app:chipBackgroundColor="@color/tag_bg_color"
-            android:text="Tag name example"
-            />
+            app:chipBackgroundColor="@color/tag_bg_color" />
     </com.google.android.material.chip.ChipGroup>
 
     <TextView
@@ -104,14 +103,14 @@
         android:layout_marginTop="6dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvLuxuryItems">
+
         <com.google.android.material.chip.Chip
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Tag name example"
             android:textAppearance="@style/ChipStyle"
             android:textColor="@color/tag_text_color"
-            app:chipBackgroundColor="@color/tag_bg_color"
-            android:text="Tag name example"
-            />
+            app:chipBackgroundColor="@color/tag_bg_color" />
 
     </com.google.android.material.chip.ChipGroup>
 
@@ -136,14 +135,14 @@
         android:layout_marginTop="6dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvBusinessTags">
+
         <com.google.android.material.chip.Chip
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Tag name example"
             android:textAppearance="@style/ChipStyle"
             android:textColor="@color/tag_text_color"
-            app:chipBackgroundColor="@color/tag_bg_color"
-            android:text="Tag name example"
-            />
+            app:chipBackgroundColor="@color/tag_bg_color" />
 
     </com.google.android.material.chip.ChipGroup>
 
@@ -168,14 +167,14 @@
         android:layout_marginTop="6dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvEntertainmentTags">
+
         <com.google.android.material.chip.Chip
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Tag name example"
             android:textAppearance="@style/ChipStyle"
             android:textColor="@color/tag_text_color"
-            app:chipBackgroundColor="@color/tag_bg_color"
-            android:text="Tag name example"
-            />
+            app:chipBackgroundColor="@color/tag_bg_color" />
     </com.google.android.material.chip.ChipGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

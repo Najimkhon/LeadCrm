@@ -1,10 +1,20 @@
 query Leads{
     fetchLeads{
         data{
+            id
             firstName
             lastName
             createdAt
             updatedAt
+            intention{
+                title
+            }
+            status{
+                title
+            }
+            channelSource{
+                title
+            }
             adSource{
                 title
             }
