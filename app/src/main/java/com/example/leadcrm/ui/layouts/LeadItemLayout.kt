@@ -37,9 +37,9 @@ class LeadItemLayout(context: Context) : RelativeLayout(context) {
             tvUpdatedDate.text = "Updated date: $updatedDate"
             tvName.text = lead.firstName + " " + lead.lastName
             tvProfileInitials.text = firstNameInit + lastNameInit
-            if (lead.country?.emoji != null){
+            if (lead.country?.emoji != null) {
                 tvEmoji.text = lead.country.emoji
-            }else{
+            } else {
                 tvEmoji.text = DEFAULT_EMOJI
             }
         }
@@ -80,6 +80,4 @@ class LeadItemLayout(context: Context) : RelativeLayout(context) {
         }
         binding.adSources.addView(chip)
     }
-
-
 }

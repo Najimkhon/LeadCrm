@@ -9,7 +9,6 @@ plugins {
 }
 
 android {
-    namespace 'com.example.leadcrm'
     compileSdk 33
 
     defaultConfig {
