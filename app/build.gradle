@@ -46,6 +46,7 @@ android {
 
         service("service") {
             packageName.set("com.example.graphql")
+            generateKotlinModels.set(true)
 
 //            introspection{
 //                endpointUrl.set("http://54.246.238.84:3000/graphql")

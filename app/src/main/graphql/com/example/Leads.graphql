@@ -1,4 +1,4 @@
-query Query{
+query Leads{
     fetchLeads{
         data{
             firstName
