@@ -3,6 +3,7 @@ package com.example.leadcrm.ui.customviews
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.example.leadcrm.R
@@ -38,7 +39,7 @@ class TextViewCustomView @JvmOverloads constructor(
     }
 
     fun showNormalState(){
-        binding.tvText.setTextColor(ContextCompat.getColor(context, R.color.dark_blue))
+        binding.tvText.setTextColor(ContextCompat.getColor(context, R.color.edit_text_hint_color))
         binding.tvText.setBackgroundResource(R.drawable.edit_text_bg)
     }
 
@@ -46,20 +47,27 @@ class TextViewCustomView @JvmOverloads constructor(
         if (attrs == null) return
         val typedArray = context.obtainStyledAttributes(
             attrs,
-            R.styleable.EditTextCustomView,
+            R.styleable.TextViewCustomView,
             defStyleAttr,
             defStyleRes
         )
 
         with(binding) {
 
-            val labelText = typedArray.getString(R.styleable.TextViewCustomView_tvLabel)
+            val labelText = typedArray.getString(R.styleable.TextViewCustomView_CustomTvLabel)
             tvLabel.text = labelText
 
-            val inputText = typedArray.getString(R.styleable.TextViewCustomView_tvText)
+            val inputText = typedArray.getString(R.styleable.TextViewCustomView_CustomTvText)
             tvText.text = inputText
 
-            val error = typedArray.getBoolean(R.styleable.TextViewCustomView_tvError, false)
+            val showIcon = typedArray.getBoolean(R.styleable.TextViewCustomView_ShowDialogIcon, false)
+            if (showIcon){
+                binding.ivDialogIcon.visibility = View.VISIBLE
+            }else{
+                binding.ivDialogIcon.visibility = View.INVISIBLE
+            }
+
+            val error = typedArray.getBoolean(R.styleable.TextViewCustomView_CustomTvError, false)
             if (error){
                 showErrorState()
             }else{

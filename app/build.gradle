@@ -82,8 +82,6 @@ dependencies {
     //circular image view
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
-    implementation 'tk.zielony:carbon:0.16.0.1'
-
     //graphQL
    implementation "com.apollographql.apollo3:apollo-runtime:3.8.1"
 }

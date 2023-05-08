@@ -9,12 +9,14 @@
 
     <declare-styleable name="SpinnerCustomView">
         <attr name="spinnerHint" format="string" />
-        <attr name="spinnerError" format="boolean"/>
+        <attr name="spinnerError" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="TextViewCustomView">
-        <attr name="tvLabel" format="string" />
-        <attr name="tvText" format="string" />
-        <attr name="tvError" format="boolean" />
+        <attr name="CustomTvText" format="string" />
+        <attr name="CustomTvLabel" format="string" />
+        <attr name="CustomTvError" format="boolean" />
+        <attr name="ShowDialogIcon" format="boolean" />
     </declare-styleable>
+
 </resources>
