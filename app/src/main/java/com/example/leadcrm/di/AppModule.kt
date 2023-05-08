@@ -3,6 +3,7 @@ package com.example.leadcrm.di
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.network.okHttpClient
 import com.example.leadcrm.data.ApolloLeadsClient
+import com.example.leadcrm.domain.GetCountriesUseCase
 import com.example.leadcrm.domain.GetLeadsUseCase
 import com.example.leadcrm.domain.LeadsClient
 import com.example.leadcrm.utils.Constants.GRAPHQL_TOKEN
@@ -49,5 +50,11 @@ object AppModule {
     @Singleton
     fun provideGetLeadsUseCase(leadsClient: LeadsClient):GetLeadsUseCase{
         return GetLeadsUseCase(leadsClient)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetCountriesUseCase(leadsClient: LeadsClient):GetCountriesUseCase{
+        return GetCountriesUseCase(leadsClient)
     }
 }
