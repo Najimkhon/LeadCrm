@@ -1,6 +1,5 @@
 package com.example.leadcrm.ui.dialogs
 
-import android.app.Dialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,20 +7,20 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.leadcrm.databinding.CountriesBottomSheetDialogBinding
 import com.example.leadcrm.ui.adapters.CountryAdapter
-import com.example.leadcrm.ui.adapters.LeadAdapter
+import com.example.leadcrm.ui.layouts.CountryItemLayout
 import com.example.leadcrm.ui.viewmodels.LeadsViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class CountriesDialogFragment : BottomSheetDialogFragment() {
+class CountriesDialogFragment(listener: CountryItemLayout.OnItemClickListener) :
+    BottomSheetDialogFragment() {
     private var _binding: CountriesBottomSheetDialogBinding? = null
     private val binding get() = _binding!!
     private val viewModel: LeadsViewModel by activityViewModels()
-    private val countryAdapter: CountryAdapter by lazy { CountryAdapter(requireContext()) }
+    private val countryAdapter: CountryAdapter by lazy { CountryAdapter(requireContext(), listener) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,7 +34,7 @@ class CountriesDialogFragment : BottomSheetDialogFragment() {
             adapter = countryAdapter
         }
 
-        viewModel.countriesLiveData.observe(this){
+        viewModel.countriesLiveData.observe(this) {
             Log.d("CountriesDialogFragment", "Received countries: ${it.size}")
             countryAdapter.setData(it)
         }
@@ -44,12 +43,6 @@ class CountriesDialogFragment : BottomSheetDialogFragment() {
         setupSearchEditText()
 
         return binding.root
-    }
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = super.onCreateDialog(savedInstanceState)
-        dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
-
-        return dialog
     }
 
     private fun setupSearchEditText() {

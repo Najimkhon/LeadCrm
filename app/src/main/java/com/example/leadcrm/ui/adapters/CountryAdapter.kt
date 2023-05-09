@@ -10,7 +10,8 @@ import com.example.leadcrm.ui.layouts.CountryItemLayout
 import java.util.*
 
 class CountryAdapter(
-    val context: Context
+    val context: Context,
+    private val listener: CountryItemLayout.OnItemClickListener
 ):RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() {
 
     private val originalList = mutableListOf<CountriesQuery.FetchCountry>()
@@ -38,7 +39,7 @@ class CountryAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryViewHolder {
-        return CountryViewHolder(CountryItemLayout(context))
+        return CountryViewHolder(CountryItemLayout(context, listener))
     }
 
     override fun getItemCount(): Int {

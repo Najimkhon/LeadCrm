@@ -9,21 +9,22 @@ import com.example.leadcrm.base.BaseFragment
 import com.example.leadcrm.databinding.FragmentAddLeadBinding
 import com.example.leadcrm.ui.dialogs.CountriesDialogFragment
 import com.example.leadcrm.ui.dialogs.LanguagesDialogFragment
-import com.example.leadcrm.ui.dialogs.StatusDialogFragment
+import com.example.leadcrm.ui.layouts.CountryItemLayout
 import com.example.leadcrm.ui.viewmodels.LeadsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AddLeadFragment : BaseFragment<FragmentAddLeadBinding>(FragmentAddLeadBinding::inflate),
-    LanguagesDialogFragment.OnDialogClosedListener {
+    LanguagesDialogFragment.OnDialogClosedListener, CountryItemLayout.OnItemClickListener {
 
     private val viewModel: LeadsViewModel by activityViewModels()
     private lateinit var newLead: CreateLeadInput
     private var selectedLanguages = mutableListOf<Int>()
+    private var selectedCountryId = -1
+    private val countriesDialog = CountriesDialogFragment(this)
 
     override fun setListeners() {
-        val countriesDialog = CountriesDialogFragment()
-        val statusDialog = StatusDialogFragment()
+
         val languagesDialog = LanguagesDialogFragment(this)
 
         binding.spCountry.setOnClickListener {
@@ -33,10 +34,6 @@ class AddLeadFragment : BaseFragment<FragmentAddLeadBinding>(FragmentAddLeadBind
         binding.btnSave.setOnClickListener {
             saveNewLead()
             Toast.makeText(requireContext(), "${binding.etFirstName}", Toast.LENGTH_SHORT).show()
-        }
-
-        binding.spLeadType.setOnClickListener {
-            statusDialog.show(childFragmentManager, "StatusDialog")
         }
 
         binding.spLanguage.setOnClickListener {
@@ -59,7 +56,7 @@ class AddLeadFragment : BaseFragment<FragmentAddLeadBinding>(FragmentAddLeadBind
                 )
             }
             println("THE NEW LEAD: " + newLead)
-            //viewModel.createLead(newLead)
+            viewModel.createLead(newLead)
             showState()
         } else {
             showState()
@@ -102,5 +99,12 @@ class AddLeadFragment : BaseFragment<FragmentAddLeadBinding>(FragmentAddLeadBind
             binding.spLanguage.setText("Language")
             binding.spLanguage.setDeselected()
         }
+    }
+
+    override fun onItemClicked(countryId: Int, countryTitle: String) {
+        selectedCountryId = countryId
+        binding.spCountry.setSelected()
+        binding.spCountry.setText(countryTitle)
+        countriesDialog.dismiss()
     }
 }
