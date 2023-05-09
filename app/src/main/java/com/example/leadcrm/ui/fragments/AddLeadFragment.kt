@@ -14,15 +14,17 @@ import com.example.leadcrm.ui.viewmodels.LeadsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddLeadFragment : BaseFragment<FragmentAddLeadBinding>(FragmentAddLeadBinding::inflate) {
+class AddLeadFragment : BaseFragment<FragmentAddLeadBinding>(FragmentAddLeadBinding::inflate),
+    LanguagesDialogFragment.OnDialogClosedListener {
 
     private val viewModel: LeadsViewModel by activityViewModels()
     private lateinit var newLead: CreateLeadInput
+    private var selectedLanguages = mutableListOf<Int>()
 
     override fun setListeners() {
         val countriesDialog = CountriesDialogFragment()
         val statusDialog = StatusDialogFragment()
-        val languagesDialog = LanguagesDialogFragment()
+        val languagesDialog = LanguagesDialogFragment(this)
 
         binding.spCountry.setOnClickListener {
             countriesDialog.show(childFragmentManager, "CountriesDialog")
@@ -44,7 +46,6 @@ class AddLeadFragment : BaseFragment<FragmentAddLeadBinding>(FragmentAddLeadBind
 
     fun saveNewLead() {
         if (validation()) {
-            val languageIds = listOf<Int>()
             val phoneNumber = ContactDataInput(
                 phone = Optional.Present(binding.etNumber.getText())
             )
@@ -53,7 +54,7 @@ class AddLeadFragment : BaseFragment<FragmentAddLeadBinding>(FragmentAddLeadBind
                 newLead = CreateLeadInput(
                     firstName = etFirstName.getText(),
                     intentionId = 1,
-                    languageIds = languageIds,
+                    languageIds = selectedLanguages,
                     contacts = listOf(phoneNumber)
                 )
             }
@@ -91,5 +92,15 @@ class AddLeadFragment : BaseFragment<FragmentAddLeadBinding>(FragmentAddLeadBind
         }
     }
 
-
+    override fun onDialogClosed(selectedLanguages: List<Int>) {
+        this.selectedLanguages.clear()
+        this.selectedLanguages.addAll(selectedLanguages)
+        if (this.selectedLanguages.size > 0) {
+            binding.spLanguage.setText("Selected")
+            binding.spLanguage.setSelected()
+        } else {
+            binding.spLanguage.setText("Language")
+            binding.spLanguage.setDeselected()
+        }
+    }
 }

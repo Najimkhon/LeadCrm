@@ -15,17 +15,28 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.graphql.LanguagesQuery
 import com.example.leadcrm.databinding.LanguagesBottomSheetDialogBinding
 import com.example.leadcrm.ui.adapters.LanguageAdapter
+import com.example.leadcrm.ui.layouts.LanguageItemLayout
 import com.example.leadcrm.ui.viewmodels.LeadsViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.util.*
 
-class LanguagesDialogFragment : BottomSheetDialogFragment() {
+class LanguagesDialogFragment(private val listener: OnDialogClosedListener) : BottomSheetDialogFragment(), LanguageItemLayout.OnClickListener {
+
     private var _binding: LanguagesBottomSheetDialogBinding? = null
     private val binding get() = _binding!!
+
     private val viewModel: LeadsViewModel by activityViewModels()
-    private val languageAdapter: LanguageAdapter by lazy { LanguageAdapter(requireContext()) }
+
     private var originalList = mutableListOf<LanguagesQuery.Language>()
     private val filteredList = MutableLiveData<List<LanguagesQuery.Language>>()
+    private val selectionList = mutableListOf<LanguageSelectionHolder>()
+
+    private val languageAdapter: LanguageAdapter by lazy {
+        LanguageAdapter(
+            requireContext(),
+            this,
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,6 +53,12 @@ class LanguagesDialogFragment : BottomSheetDialogFragment() {
         viewModel.languagesLiveData.observe(this) {
             originalList.clear() // Clear the list before re-assigning
             originalList.addAll(it)
+
+            selectionList.clear()
+            originalList.forEach { item ->
+                selectionList.add(LanguageSelectionHolder(item.id, false))
+            }
+            languageAdapter.selectionList = selectionList
             filteredList.postValue(originalList)
         }
         viewModel.getLanguages()
@@ -50,7 +67,6 @@ class LanguagesDialogFragment : BottomSheetDialogFragment() {
         filteredList.observe(this) {
             languageAdapter.setData(it)
         }
-
 
         return binding.root
     }
@@ -108,7 +124,28 @@ class LanguagesDialogFragment : BottomSheetDialogFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        var listOfIds = mutableListOf<Int>()
+        selectionList.forEach {
+            if (it.isSelected){
+                listOfIds.add(it.id)
+            }
+        }
+
+        listener.onDialogClosed(listOfIds)
         _binding = null
     }
 
+    override fun onItemClicked(languageId: Int, position: Int) {
+
+        val languageSelectionHolder = selectionList.find { it.id == languageId }!!
+        languageSelectionHolder.isSelected = !languageSelectionHolder.isSelected
+
+        languageAdapter.notifyItemChanged(position)
+    }
+
+    interface OnDialogClosedListener{
+        fun onDialogClosed(selectedLanguages: List<Int>)
+    }
+
+    data class LanguageSelectionHolder(val id: Int, var isSelected: Boolean)
 }

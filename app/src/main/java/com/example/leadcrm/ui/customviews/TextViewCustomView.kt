@@ -29,6 +29,14 @@ class TextViewCustomView @JvmOverloads constructor(
         return binding.tvText.text.toString()
     }
 
+    fun setSelected(){
+        binding.tvText.setTextColor(ContextCompat.getColor(context, R.color.dark_blue))
+    }
+
+    fun setDeselected(){
+        binding.tvText.setTextColor(ContextCompat.getColor(context, R.color.edit_text_hint_color))
+    }
+
     fun setText(text: String){
         binding.tvText.setText(text)
     }
