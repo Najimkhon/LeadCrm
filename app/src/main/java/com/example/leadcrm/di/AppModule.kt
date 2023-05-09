@@ -73,5 +73,11 @@ object AppModule {
         return CreateLeadUseCase(leadsClient)
     }
 
+    @Provides
+    @Singleton
+    fun provideGetLeadUseCase(leadsClient: LeadsClient): FetchLeadUseCase {
+        return FetchLeadUseCase(leadsClient)
+    }
+
 
 }

@@ -1,0 +1,52 @@
+query fetchLead($id: FetchLeadInput!){
+    fetchLead(params: $id){
+        data{
+            id
+            firstName
+            lastName
+            status{
+                id
+                color
+                title
+                step
+                stepsCount
+            }
+            contacts{
+                data{
+                    phoneContact{
+                        title
+                    }
+                    emailContact{
+                        title
+                    }
+                }
+            }
+            adSource{
+                title
+            }
+            country{
+                title
+            }
+            webSource{
+                title
+            }
+            city{
+                title
+            }
+            channelSource{
+                title
+            }
+            languages{
+                title
+            }
+            propertyType{
+                title
+            }
+            nationality{
+                title
+            }
+            birthDate
+
+        }
+    }
+}

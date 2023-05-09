@@ -22,7 +22,6 @@ class LeadProfileFragment :
             etLanguage.isEditable(false)
         }
         isEditableMode(false)
-
     }
 
     private fun isEditableMode(isEditable: Boolean) {

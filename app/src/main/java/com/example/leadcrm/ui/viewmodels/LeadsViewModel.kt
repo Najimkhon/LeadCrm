@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.graphql.*
 import com.example.graphql.type.CreateLeadInput
+import com.example.graphql.type.FetchLeadInput
 import com.example.leadcrm.domain.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +19,8 @@ class LeadsViewModel @Inject constructor(
     private val getCountriesUseCase: GetCountriesUseCase,
     private val getStatusListUseCase: GetStatusListUseCase,
     private val getLanguagesUseCase: GetLanguagesUseCase,
-    private val createLeadUseCase: CreateLeadUseCase
+    private val createLeadUseCase: CreateLeadUseCase,
+    private val getLeadUseCase: FetchLeadUseCase
 ) : ViewModel() {
 
     private val _leadsLiveData = MutableLiveData<LeadsQuery.FetchLeads>()
@@ -33,8 +35,8 @@ class LeadsViewModel @Inject constructor(
     private val _languagesLiveData = MutableLiveData<List<LanguagesQuery.Language>>()
     val languagesLiveData = _languagesLiveData
 
-    private val _createdLeadLiveData = MutableLiveData<CreateLeadMutation.CreateLead?>()
-    val createdLead = _createdLeadLiveData
+    private val _getLeadLiveData = MutableLiveData<FetchLeadQuery.FetchLead?>()
+    val getLead = _getLeadLiveData
 
 
     fun getLeads() {
@@ -88,10 +90,21 @@ class LeadsViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val response = createLeadUseCase.execute(newLead)
-                _createdLeadLiveData.postValue(response)
                 Log.d("CreateLead", "Success $response")
             } catch (e: Exception) {
                 Log.e("CreateLead", "Error: ${e.message}", e)
+            }
+        }
+    }
+
+    fun getLead(lead: FetchLeadInput){
+        viewModelScope.launch {
+            try {
+                val response = getLeadUseCase.execute(lead)
+                _getLeadLiveData.postValue(response)
+                Log.d("GetLead", "Success $response")
+            } catch (e: Exception) {
+                Log.e("GetLead", "Error: ${e.message}", e)
             }
         }
     }

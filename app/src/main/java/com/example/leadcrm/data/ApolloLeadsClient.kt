@@ -3,6 +3,7 @@ package com.example.leadcrm.data
 import com.apollographql.apollo3.ApolloClient
 import com.example.graphql.*
 import com.example.graphql.type.CreateLeadInput
+import com.example.graphql.type.FetchLeadInput
 import com.example.leadcrm.domain.LeadsClient
 import javax.inject.Inject
 
@@ -51,5 +52,13 @@ class ApolloLeadsClient @Inject constructor(
             .execute()
             .data
             ?.createLead
+    }
+
+    override suspend fun getLead(lead: FetchLeadInput): FetchLeadQuery.FetchLead? {
+        return apolloClient
+            .query(FetchLeadQuery(lead))
+            .execute()
+            .data
+            ?.fetchLead
     }
 }
