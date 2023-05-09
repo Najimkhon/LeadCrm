@@ -1,5 +1,6 @@
 package com.example.leadcrm.ui.dialogs
 
+import android.app.Dialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -7,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.leadcrm.databinding.CountriesBottomSheetDialogBinding
@@ -42,6 +44,12 @@ class CountriesDialogFragment : BottomSheetDialogFragment() {
         setupSearchEditText()
 
         return binding.root
+    }
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = super.onCreateDialog(savedInstanceState)
+        dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+
+        return dialog
     }
 
     private fun setupSearchEditText() {
