@@ -4,14 +4,9 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.graphql.CountriesQuery
-import com.example.graphql.LanguagesQuery
-import com.example.graphql.LeadsQuery
-import com.example.graphql.StatusQuery
-import com.example.leadcrm.domain.GetCountriesUseCase
-import com.example.leadcrm.domain.GetLanguagesUseCase
-import com.example.leadcrm.domain.GetLeadsUseCase
-import com.example.leadcrm.domain.GetStatusListUseCase
+import com.example.graphql.*
+import com.example.graphql.type.CreateLeadInput
+import com.example.leadcrm.domain.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,7 +17,8 @@ class LeadsViewModel @Inject constructor(
     private val getLeadsUseCase: GetLeadsUseCase,
     private val getCountriesUseCase: GetCountriesUseCase,
     private val getStatusListUseCase: GetStatusListUseCase,
-    private val getLanguagesUseCase: GetLanguagesUseCase
+    private val getLanguagesUseCase: GetLanguagesUseCase,
+    private val createLeadUseCase: CreateLeadUseCase
 ) : ViewModel() {
 
     private val _leadsLiveData = MutableLiveData<LeadsQuery.FetchLeads>()
@@ -36,6 +32,9 @@ class LeadsViewModel @Inject constructor(
 
     private val _languagesLiveData = MutableLiveData<List<LanguagesQuery.Language>>()
     val languagesLiveData = _languagesLiveData
+
+    private val _createdLeadLiveData = MutableLiveData<CreateLeadMutation.CreateLead?>()
+    val createdLead = _createdLeadLiveData
 
 
     fun getLeads() {
@@ -81,6 +80,18 @@ class LeadsViewModel @Inject constructor(
                 Log.d("GetLanguages", "Success $response")
             } catch (e: Exception) {
                 Log.e("GetLanguages", "Error: ${e.message}", e)
+            }
+        }
+    }
+
+    fun createLead(newLead: CreateLeadInput){
+        viewModelScope.launch {
+            try {
+                val response = createLeadUseCase.execute(newLead)
+                _createdLeadLiveData.postValue(response)
+                Log.d("CreateLead", "Success $response")
+            } catch (e: Exception) {
+                Log.e("CreateLead", "Error: ${e.message}", e)
             }
         }
     }

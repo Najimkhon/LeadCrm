@@ -1,0 +1,8 @@
+mutation CreateLead($lead: CreateLeadInput!){
+    createLead(params: $lead){
+        data{
+            firstName
+            lastName
+        }
+    }
+}

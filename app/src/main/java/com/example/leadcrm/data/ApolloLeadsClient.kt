@@ -1,10 +1,8 @@
 package com.example.leadcrm.data
 
 import com.apollographql.apollo3.ApolloClient
-import com.example.graphql.CountriesQuery
-import com.example.graphql.LanguagesQuery
-import com.example.graphql.LeadsQuery
-import com.example.graphql.StatusQuery
+import com.example.graphql.*
+import com.example.graphql.type.CreateLeadInput
 import com.example.leadcrm.domain.LeadsClient
 import javax.inject.Inject
 
@@ -45,5 +43,13 @@ class ApolloLeadsClient @Inject constructor(
             .data
             ?.languages
             ?: emptyList()
+    }
+
+    override suspend fun createLead(newLead: CreateLeadInput): CreateLeadMutation.CreateLead? {
+        return apolloClient
+            .mutation(CreateLeadMutation(newLead))
+            .execute()
+            .data
+            ?.createLead
     }
 }

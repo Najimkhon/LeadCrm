@@ -1,13 +1,23 @@
 package com.example.leadcrm.ui.fragments
 
+import android.widget.Toast
+import androidx.fragment.app.activityViewModels
+import com.apollographql.apollo3.api.Optional
+import com.example.graphql.type.ContactDataInput
+import com.example.graphql.type.CreateLeadInput
 import com.example.leadcrm.base.BaseFragment
 import com.example.leadcrm.databinding.FragmentAddLeadBinding
 import com.example.leadcrm.ui.dialogs.CountriesDialogFragment
 import com.example.leadcrm.ui.dialogs.LanguagesDialogFragment
 import com.example.leadcrm.ui.dialogs.StatusDialogFragment
+import com.example.leadcrm.ui.viewmodels.LeadsViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class AddLeadFragment : BaseFragment<FragmentAddLeadBinding>(FragmentAddLeadBinding::inflate) {
+
+    private val viewModel: LeadsViewModel by activityViewModels()
+    private lateinit var newLead: CreateLeadInput
 
     override fun setListeners() {
         val countriesDialog = CountriesDialogFragment()
@@ -19,7 +29,8 @@ class AddLeadFragment : BaseFragment<FragmentAddLeadBinding>(FragmentAddLeadBind
         }
 
         binding.btnSave.setOnClickListener {
-            binding.spLeadType.showErrorState()
+            saveNewLead()
+            Toast.makeText(requireContext(), "${binding.etFirstName}", Toast.LENGTH_SHORT).show()
         }
 
         binding.spLeadType.setOnClickListener {
@@ -30,4 +41,55 @@ class AddLeadFragment : BaseFragment<FragmentAddLeadBinding>(FragmentAddLeadBind
             languagesDialog.show(childFragmentManager, "LanguagesDialog")
         }
     }
+
+    fun saveNewLead() {
+        if (validation()) {
+            val languageIds = listOf<Int>()
+            val phoneNumber = ContactDataInput(
+                phone = Optional.Present(binding.etNumber.getText())
+            )
+
+            binding.apply {
+                newLead = CreateLeadInput(
+                    firstName = etFirstName.getText(),
+                    intentionId = 1,
+                    languageIds = languageIds,
+                    contacts = listOf(phoneNumber)
+                )
+            }
+            println("THE NEW LEAD: " + newLead)
+            //viewModel.createLead(newLead)
+            showState()
+        } else {
+            showState()
+        }
+    }
+
+    private fun validation(): Boolean {
+        return binding.etFirstName.getText().isNotEmpty() && binding.etNumber.getText()
+            .isNotEmpty() && binding.spLanguage.getText().isNotEmpty()
+
+    }
+
+    private fun showState() {
+        binding.apply {
+            if (spLanguage.getText() == "Language") {
+                spLanguage.showErrorState()
+            } else {
+                spLanguage.showNormalState()
+            }
+            if (etFirstName.getText().isEmpty()) {
+                etFirstName.showErrorState()
+            } else {
+                etFirstName.showNormalState()
+            }
+            if (etNumber.getText().isEmpty()) {
+                etNumber.showErrorState()
+            } else {
+                etNumber.showNormalState()
+            }
+        }
+    }
+
+
 }

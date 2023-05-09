@@ -25,6 +25,10 @@ class TextViewCustomView @JvmOverloads constructor(
         initializeAttributes(attrs, defStyleAttr, defStyleRes)
     }
 
+    fun getText():String{
+        return binding.tvText.text.toString()
+    }
+
     fun setText(text: String){
         binding.tvText.setText(text)
     }

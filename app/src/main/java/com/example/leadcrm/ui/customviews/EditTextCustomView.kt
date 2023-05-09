@@ -13,7 +13,7 @@ class EditTextCustomView @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
     defStyleRes: Int = 0
-): ConstraintLayout(context, attrs, defStyleAttr, defStyleRes) {
+) : ConstraintLayout(context, attrs, defStyleAttr, defStyleRes) {
     private val binding: EditTextCustomViewBinding
 
     init {
@@ -23,24 +23,28 @@ class EditTextCustomView @JvmOverloads constructor(
         initializeAttributes(attrs, defStyleAttr, defStyleRes)
     }
 
-    fun setText(text: String){
+    fun getText(): String {
+        return binding.editText.text.toString()
+    }
+
+    fun setText(text: String) {
         binding.editText.setText(text)
     }
 
-    fun setHint(text: String){
+    fun setHint(text: String) {
         binding.editText.hint = text
     }
 
-    fun setLabel(text: String){
+    fun setLabel(text: String) {
         binding.tvLabel.text = text
     }
 
-    fun showErrorState(){
+    fun showErrorState() {
         binding.editText.setTextColor(ContextCompat.getColor(context, R.color.error_color))
         binding.editText.setBackgroundResource(R.drawable.edit_text_error_bg)
     }
 
-    fun showNormalState(){
+    fun showNormalState() {
         binding.editText.setTextColor(ContextCompat.getColor(context, R.color.dark_blue))
         binding.editText.setBackgroundResource(R.drawable.edit_text_bg)
     }
@@ -65,9 +69,9 @@ class EditTextCustomView @JvmOverloads constructor(
             editText.setText(inputText)
 
             val error = typedArray.getBoolean(R.styleable.EditTextCustomView_error, false)
-            if (error){
+            if (error) {
                 showErrorState()
-            }else{
+            } else {
                 showNormalState()
             }
         }
