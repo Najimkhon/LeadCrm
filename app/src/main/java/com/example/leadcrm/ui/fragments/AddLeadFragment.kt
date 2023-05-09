@@ -2,6 +2,7 @@ package com.example.leadcrm.ui.fragments
 
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.apollographql.apollo3.api.Optional
 import com.example.graphql.type.ContactDataInput
 import com.example.graphql.type.CreateLeadInput
@@ -39,32 +40,41 @@ class AddLeadFragment : BaseFragment<FragmentAddLeadBinding>(FragmentAddLeadBind
         binding.spLanguage.setOnClickListener {
             languagesDialog.show(childFragmentManager, "LanguagesDialog")
         }
+
+        binding.btnCancel.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
-    fun saveNewLead() {
+    private fun saveNewLead() {
         if (validation()) {
-            val phoneNumber = ContactDataInput(
-                phone = Optional.Present(binding.etNumber.getText())
+            val email = ContactDataInput(
+                email = Optional.Present(binding.etEmail.getText())
             )
-
             binding.apply {
                 newLead = CreateLeadInput(
                     firstName = etFirstName.getText(),
                     intentionId = 1,
                     languageIds = selectedLanguages,
-                    contacts = listOf(phoneNumber)
+                    contacts = listOf(email),
+                    lastName = Optional.Present(binding.etLastName.getText())
                 )
             }
             println("THE NEW LEAD: " + newLead)
-            viewModel.createLead(newLead)
+            //viewModel.createLead(newLead)
             showState()
+            findNavController().popBackStack()
         } else {
             showState()
         }
     }
 
     private fun validation(): Boolean {
-        return binding.etFirstName.getText().isNotEmpty() && binding.etNumber.getText()
+        return binding.etFirstName.getText().isNotEmpty() && binding.etEmail.getText()
             .isNotEmpty() && binding.spLanguage.getText().isNotEmpty()
 
     }
@@ -81,10 +91,10 @@ class AddLeadFragment : BaseFragment<FragmentAddLeadBinding>(FragmentAddLeadBind
             } else {
                 etFirstName.showNormalState()
             }
-            if (etNumber.getText().isEmpty()) {
-                etNumber.showErrorState()
+            if (etEmail.getText().isEmpty()) {
+                etEmail.showErrorState()
             } else {
-                etNumber.showNormalState()
+                etEmail.showNormalState()
             }
         }
     }

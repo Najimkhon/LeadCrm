@@ -1,6 +1,7 @@
 package com.example.leadcrm.ui.customviews
 
 import android.content.Context
+import android.text.InputType
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -39,6 +40,10 @@ class EditTextCustomView @JvmOverloads constructor(
         binding.tvLabel.text = text
     }
 
+    fun isEditable(isEnabled: Boolean){
+        binding.editText.isEnabled = isEnabled
+    }
+
     fun showErrorState() {
         binding.editText.setTextColor(ContextCompat.getColor(context, R.color.error_color))
         binding.editText.setBackgroundResource(R.drawable.edit_text_error_bg)
@@ -74,6 +79,15 @@ class EditTextCustomView @JvmOverloads constructor(
             } else {
                 showNormalState()
             }
+
+            val isEmail = typedArray.getBoolean(R.styleable.EditTextCustomView_isEmailInput, false)
+            if (isEmail) {
+                binding.editText.inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
+            }
+
+            val isEnabled = typedArray.getBoolean(R.styleable.EditTextCustomView_isEnabled, true)
+
+            editText.isEnabled = isEnabled
         }
 
         typedArray.recycle()

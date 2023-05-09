@@ -5,6 +5,8 @@
         <attr name="label" format="string" />
         <attr name="text" format="string" />
         <attr name="error" format="boolean" />
+        <attr name="isEmailInput" format="boolean" />
+        <attr name="isEnabled" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="SpinnerCustomView">
