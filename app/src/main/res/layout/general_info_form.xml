@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:id="@+id/btnEditGeneralInfo"
         android:layout_width="18dp"
         android:layout_height="18dp"
         android:layout_marginLeft="8dp"
@@ -24,6 +25,16 @@
         app:layout_constraintBottom_toBottomOf="@id/tvGeneralInfo"
         app:layout_constraintLeft_toRightOf="@id/tvGeneralInfo"
         app:layout_constraintTop_toTopOf="@id/tvGeneralInfo" />
+    <ImageView
+        android:id="@+id/btnSaveGeneralInfo"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginLeft="8dp"
+        android:src="@drawable/ic_save_changes"
+        app:layout_constraintBottom_toBottomOf="@id/tvGeneralInfo"
+        app:layout_constraintLeft_toRightOf="@id/tvGeneralInfo"
+        app:layout_constraintTop_toTopOf="@id/tvGeneralInfo"
+        android:visibility="gone"/>
 
     <com.example.leadcrm.ui.customviews.EditTextCustomView
         android:id="@+id/etLeadType"
@@ -104,7 +115,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="5dp"
         app:hint="Unknown"
-        app:label="City/Language"
+        app:label="Language"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/etProperty"
         app:layout_constraintTop_toBottomOf="@id/etCity" />
@@ -194,7 +205,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="5dp"
         app:hint="Unknown"
-        app:label="City/Language"
+        app:label="Language"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/etPropertyTypeSecond"
         app:layout_constraintTop_toBottomOf="@id/etCityProperty" />
