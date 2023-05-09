@@ -3,9 +3,7 @@ package com.example.leadcrm.di
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.network.okHttpClient
 import com.example.leadcrm.data.ApolloLeadsClient
-import com.example.leadcrm.domain.GetCountriesUseCase
-import com.example.leadcrm.domain.GetLeadsUseCase
-import com.example.leadcrm.domain.LeadsClient
+import com.example.leadcrm.domain.*
 import com.example.leadcrm.utils.Constants.GRAPHQL_TOKEN
 import dagger.Module
 import dagger.Provides
@@ -57,4 +55,18 @@ object AppModule {
     fun provideGetCountriesUseCase(leadsClient: LeadsClient):GetCountriesUseCase{
         return GetCountriesUseCase(leadsClient)
     }
+
+    @Provides
+    @Singleton
+    fun provideGetStatusListUseCase(leadsClient: LeadsClient):GetStatusListUseCase{
+        return GetStatusListUseCase(leadsClient)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetLanguagesUseCase(leadsClient: LeadsClient):GetLanguagesUseCase{
+        return GetLanguagesUseCase(leadsClient)
+    }
+
+
 }
