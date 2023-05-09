@@ -2,6 +2,7 @@ package com.example.leadcrm.data
 
 import com.apollographql.apollo3.ApolloClient
 import com.example.graphql.CountriesQuery
+import com.example.graphql.LanguagesQuery
 import com.example.graphql.LeadsQuery
 import com.example.graphql.StatusQuery
 import com.example.leadcrm.domain.LeadsClient
@@ -34,6 +35,15 @@ class ApolloLeadsClient @Inject constructor(
             .execute()
             .data
             ?.fetchLeadStatusTypes
+            ?: emptyList()
+    }
+
+    override suspend fun getLanguages(): List<LanguagesQuery.Language> {
+        return apolloClient
+            .query(LanguagesQuery())
+            .execute()
+            .data
+            ?.languages
             ?: emptyList()
     }
 }

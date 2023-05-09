@@ -5,9 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.graphql.CountriesQuery
+import com.example.graphql.LanguagesQuery
 import com.example.graphql.LeadsQuery
 import com.example.graphql.StatusQuery
 import com.example.leadcrm.domain.GetCountriesUseCase
+import com.example.leadcrm.domain.GetLanguagesUseCase
 import com.example.leadcrm.domain.GetLeadsUseCase
 import com.example.leadcrm.domain.GetStatusListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +21,8 @@ import javax.inject.Inject
 class LeadsViewModel @Inject constructor(
     private val getLeadsUseCase: GetLeadsUseCase,
     private val getCountriesUseCase: GetCountriesUseCase,
-    private val getStatusListUseCase: GetStatusListUseCase
+    private val getStatusListUseCase: GetStatusListUseCase,
+    private val getLanguagesUseCase: GetLanguagesUseCase
 ) : ViewModel() {
 
     private val _leadsLiveData = MutableLiveData<LeadsQuery.FetchLeads>()
@@ -30,6 +33,10 @@ class LeadsViewModel @Inject constructor(
 
     private val _statusListLiveData = MutableLiveData<List<StatusQuery.FetchLeadStatusType>>()
     val statusListLiveData = _statusListLiveData
+
+    private val _languagesLiveData = MutableLiveData<List<LanguagesQuery.Language>>()
+    val languagesLiveData = _languagesLiveData
+
 
     fun getLeads() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -63,6 +70,17 @@ class LeadsViewModel @Inject constructor(
                 Log.d("GetStatusList", "Success $response")
             } catch (e: Exception) {
                 Log.e("GetStatusList", "Error: ${e.message}", e)
+            }
+        }
+    }
+    fun getLanguages(){
+        viewModelScope.launch {
+            try {
+                val response = getLanguagesUseCase.execute()
+                _languagesLiveData.postValue(response)
+                Log.d("GetLanguages", "Success $response")
+            } catch (e: Exception) {
+                Log.e("GetLanguages", "Error: ${e.message}", e)
             }
         }
     }
