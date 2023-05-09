@@ -51,7 +51,7 @@ class LanguagesDialogFragment(private val listener: OnDialogClosedListener) : Bo
         }
 
         viewModel.languagesLiveData.observe(this) {
-            originalList.clear() // Clear the list before re-assigning
+            originalList.clear()
             originalList.addAll(it)
 
             selectionList.clear()
@@ -64,6 +64,7 @@ class LanguagesDialogFragment(private val listener: OnDialogClosedListener) : Bo
         viewModel.getLanguages()
 
         setupSearchEditText()
+
         filteredList.observe(this) {
             languageAdapter.setData(it)
         }
@@ -116,7 +117,6 @@ class LanguagesDialogFragment(private val listener: OnDialogClosedListener) : Bo
 
             override fun afterTextChanged(s: Editable?) {
                 val query = s.toString()
-                Log.d("CountriesDialogFragment", "Search query: $query")
                 filter(query)
             }
         })

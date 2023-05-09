@@ -44,8 +44,6 @@ class LanguageAdapter(
         val helperSelected = helperItem?.isSelected ?: false
 
         holder.layout.fillContent(currentLanguage, position, isSelected)
-        println("hop: onBindViewHolder: position=$position, helperItem = $helperItem, helperSelected = $helperSelected,  ")
-
     }
 
     override fun getItemCount(): Int {
