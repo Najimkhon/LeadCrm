@@ -1,6 +1,9 @@
 package com.example.leadcrm.ui.dialogs
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,17 +28,39 @@ class CountriesDialogFragment : BottomSheetDialogFragment() {
     ): View {
         _binding = CountriesBottomSheetDialogBinding.inflate(inflater, container, false)
 
-        viewModel.getCountries()
-        viewModel.countriesLiveData.observe(this){
-            countryAdapter.setData(it)
+        binding.rvCountries.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = countryAdapter
         }
 
-        binding.rvCountries.apply {
-            adapter = countryAdapter
-            layoutManager = LinearLayoutManager(requireContext())
+        viewModel.countriesLiveData.observe(this){
+            Log.d("CountriesDialogFragment", "Received countries: ${it.size}")
+            countryAdapter.setData(it)
         }
-        
+        viewModel.getCountries()
+
+        setupSearchEditText()
+
         return binding.root
+    }
+
+    private fun setupSearchEditText() {
+        binding.etSearchInput.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Not used
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Not used
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+                val query = s.toString().trim()
+                Log.d("CountriesDialogFragment", "Search query: $query")
+                countryAdapter.filter(query)
+            }
+        })
     }
 
     override fun onDestroyView() {
