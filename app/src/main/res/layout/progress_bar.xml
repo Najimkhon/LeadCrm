@@ -39,16 +39,19 @@
         app:layout_constraintRight_toLeftOf="@+id/ivFrontArrow"
         app:layout_constraintTop_toTopOf="@id/tvStatusLabel" />
 
-    <View
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvStatusColor"
         android:layout_width="10dp"
         android:layout_height="10dp"
         android:layout_margin="8dp"
-        android:background="@drawable/indicator"
+        app:cardCornerRadius="5dp"
+        app:cardBackgroundColor="@color/indicator_blue"
         app:layout_constraintBottom_toBottomOf="@id/tvOptionsLabel"
         app:layout_constraintRight_toLeftOf="@id/tvOptionsLabel"
         app:layout_constraintTop_toTopOf="@id/tvOptionsLabel" />
 
     <LinearLayout
+        android:id="@+id/progressBlocksContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:clipToPadding="false"

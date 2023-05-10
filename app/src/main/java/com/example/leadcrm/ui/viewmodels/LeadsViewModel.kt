@@ -36,7 +36,7 @@ class LeadsViewModel @Inject constructor(
     val languagesLiveData = _languagesLiveData
 
     private val _getLeadLiveData = MutableLiveData<FetchLeadQuery.FetchLead?>()
-    val getLead = _getLeadLiveData
+    val getLeadLiveData = _getLeadLiveData
 
 
     fun getLeads() {

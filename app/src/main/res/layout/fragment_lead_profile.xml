@@ -26,6 +26,7 @@
             android:textStyle="bold" />
 
         <ImageView
+            android:id="@+id/btnBack"
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_gravity="center_vertical"
@@ -64,6 +65,7 @@
                     android:background="@drawable/yellow_profile_bg" />
 
                 <TextView
+                    android:id="@+id/tvInitials"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -73,28 +75,69 @@
                     android:textStyle="bold" />
             </FrameLayout>
 
-            <TextView
-                android:id="@+id/tvName"
-                android:layout_width="0dp"
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
-                android:text="James Hetfield"
+                android:background="@null"
+                android:enabled="false"
+                android:maxLength="15"
+                android:text="James"
                 android:textColor="@color/dark_blue"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintLeft_toRightOf="@+id/profileImgContainer"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/etLastName"
                 app:layout_constraintTop_toTopOf="@id/profileImgContainer" />
 
+            <EditText
+                android:id="@+id/etLastName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:background="@null"
+                android:enabled="false"
+                android:maxLength="15"
+                android:text="Hetfield"
+                android:textColor="@color/dark_blue"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/etName"
+                app:layout_constraintLeft_toRightOf="@id/etName"
+                app:layout_constraintTop_toTopOf="@id/etName" />
+
+            <ImageView
+                android:id="@+id/btnEditName"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="4dp"
+                android:src="@drawable/ic_edit"
+                app:layout_constraintBottom_toBottomOf="@id/etLastName"
+                app:layout_constraintLeft_toRightOf="@id/etLastName"
+                app:layout_constraintTop_toTopOf="@id/etLastName" />
+
+            <ImageView
+                android:id="@+id/btnSaveName"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="4dp"
+                android:src="@drawable/ic_save_changes"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/etLastName"
+                app:layout_constraintLeft_toRightOf="@id/etLastName"
+                app:layout_constraintTop_toTopOf="@id/etLastName" />
+
             <TextView
+                android:id="@+id/tvId"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="ID: 65464"
                 android:textColor="@color/grey"
                 android:textSize="16sp"
-                app:layout_constraintLeft_toLeftOf="@+id/tvName"
+                app:layout_constraintLeft_toLeftOf="@+id/etName"
                 app:layout_constraintLeft_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvName" />
+                app:layout_constraintTop_toBottomOf="@+id/etName" />
 
             <include
                 android:id="@+id/progressBar"
@@ -120,6 +163,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="14dp"
                 app:layout_constraintTop_toBottomOf="@id/buttonsChain" />
+
             <include
                 android:id="@+id/tagsAndInterests"
                 layout="@layout/tags_and_interests"
@@ -127,9 +171,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="14dp"
                 app:layout_constraintTop_toBottomOf="@id/generaInfoForm" />
-
-
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
