@@ -11,7 +11,9 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.apollographql.apollo3.api.Optional
 import com.example.graphql.type.FetchLeadInput
+import com.example.graphql.type.UpdateLeadInput
 import com.example.leadcrm.R
 import com.example.leadcrm.base.BaseFragment
 import com.example.leadcrm.databinding.FragmentLeadProfileBinding
@@ -46,6 +48,7 @@ class LeadProfileFragment :
 
         binding.btnSaveName.setOnClickListener {
             isNameEditable(false)
+            updateLead(args.leadId)
         }
 
         binding.btnBack.setOnClickListener {
@@ -83,19 +86,25 @@ class LeadProfileFragment :
 
             binding.generaInfoForm.apply {
                 val lead = it?.data
-                etLanguage.setText(lead?.languages?.get(0)?.title.toString())
+                lead?.languages?.forEach {
+                    etLanguage.setText(it.title)
+                }
+
                 etAdSource.setText(lead?.adSource?.title ?: "")
                 etWebSource.setText(lead?.webSource?.title ?: "")
                 etCity.setText(lead?.city?.title ?: "")
                 etChannel.setText(lead?.channelSource?.title ?: "")
                 etProperty.setText(lead?.propertyType?.title ?: "")
                 etNationality.setText(lead?.nationality?.title ?: "")
-                val country = lead?.country?.title
+                val country = lead?.country
                 if (country!= null){
-                    etCountry.setText(country)
+                    etCountry.setText(country.title)
+                    selectedCountryId = it.data.country?.id ?: -1
                 }
-
-
+                lead?.languages?.forEach {
+                    etLanguage.setText(it.title)
+                    selectedLanguages.add(it.id)
+                }
             }
 
             binding.buttonsChain.apply {
@@ -149,10 +158,8 @@ class LeadProfileFragment :
 
             if (intent.resolveActivity(requireActivity().packageManager) != null) {
                 startActivity(intent)
-                println("WORKS================================")
             } else {
                 Toast.makeText(requireContext(), "No phone app found", Toast.LENGTH_SHORT).show()
-                println("ELSE================================")
             }
         }
 
@@ -206,8 +213,16 @@ class LeadProfileFragment :
         return (dp * scale + 0.5f).toInt()
     }
 
-    private fun updateLead() {
-
+    private fun updateLead(leadId: Int) {
+        val updateLeadInput = UpdateLeadInput(
+            leadId = leadId,
+            firstName = Optional.Present(binding.etName.text.toString()),
+            lastName = Optional.Present(binding.etLastName.text.toString()),
+            countryId = Optional.Present(selectedCountryId),
+            languageIds = Optional.Present(selectedLanguages)
+        )
+        viewModel.updateLead(updateLeadInput)
+        viewModel.getLead(FetchLeadInput(args.leadId))
     }
 
     private fun setProgressGraph(completedSteps: Int?, totalSteps: Int?) {

@@ -25,6 +25,7 @@ query fetchLead($id: FetchLeadInput!){
                 title
             }
             country{
+                id
                 title
             }
             webSource{
@@ -37,6 +38,7 @@ query fetchLead($id: FetchLeadInput!){
                 title
             }
             languages{
+                id
                 title
             }
             propertyType{
