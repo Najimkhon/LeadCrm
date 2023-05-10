@@ -1,8 +1,11 @@
 package com.example.leadcrm.ui.fragments
 
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -81,6 +84,7 @@ class LeadProfileFragment :
                     if (it.emailContact?.title != null){
                         btnMail.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.icon_purple_bg))
                         tvMailLabel.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
+                        setMailListener(it.emailContact.title)
                     }else{
                         btnMail.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.icon_purple_disabled_bg))
                         tvMailLabel.setTextColor(ContextCompat.getColor(requireContext(), R.color.disabled_button_icon_color))
@@ -90,6 +94,7 @@ class LeadProfileFragment :
                         tvCallLabel.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
                         btnMessage.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.icon_purple_bg))
                         tvMessageLabel.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
+                        setPhoneListener(it.phoneContact.title)
                     }else{
                         btnCall.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.icon_purple_disabled_bg))
                         tvCallLabel.setTextColor(ContextCompat.getColor(requireContext(), R.color.disabled_button_icon_color))
@@ -101,6 +106,47 @@ class LeadProfileFragment :
         }
 
         isEditableMode(false)
+    }
+
+    private fun setMailListener(email: String){
+        binding.buttonsChain.btnMail.setOnClickListener{
+            val intent = Intent(Intent.ACTION_SENDTO).apply {
+                data = Uri.parse("mailto:$email")
+            }
+            if (intent.resolveActivity(requireActivity().packageManager) != null) {
+                startActivity(intent)
+            } else {
+                Toast.makeText(requireContext(), "No email app found", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun setPhoneListener(phoneNumber: String){
+        binding.buttonsChain.btnCall.setOnClickListener {
+            val intent = Intent(Intent.ACTION_DIAL).apply {
+                data = Uri.parse("tel:$phoneNumber")
+            }
+
+            if (intent.resolveActivity(requireActivity().packageManager) != null) {
+                startActivity(intent)
+                println("WORKS================================")
+            } else {
+                Toast.makeText(requireContext(), "No phone app found", Toast.LENGTH_SHORT).show()
+                println("ELSE================================")
+            }
+        }
+
+        binding.buttonsChain.btnMessage.setOnClickListener{
+
+            val smsIntent = Intent(Intent.ACTION_SENDTO).apply {
+                data = Uri.parse("smsto:$phoneNumber")
+            }
+            if (smsIntent.resolveActivity(requireActivity().packageManager) != null) {
+                startActivity(smsIntent)
+            } else {
+                Toast.makeText(requireContext(), "No SMS app found", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun isEditableMode(isEditable: Boolean) {
