@@ -117,16 +117,17 @@
                 app:layout_constraintLeft_toRightOf="@id/etLastName"
                 app:layout_constraintTop_toTopOf="@id/etLastName" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnSaveName"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginLeft="4dp"
+                style="@style/SecondaryButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="26dp"
                 android:src="@drawable/ic_save_changes"
+                android:text="Save"
                 android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@id/etLastName"
-                app:layout_constraintLeft_toRightOf="@id/etLastName"
-                app:layout_constraintTop_toTopOf="@id/etLastName" />
+                app:layout_constraintLeft_toRightOf="@id/tvId"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvId" />
 
             <TextView
                 android:id="@+id/tvId"
