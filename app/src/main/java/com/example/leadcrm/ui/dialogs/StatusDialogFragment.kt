@@ -10,14 +10,15 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.leadcrm.databinding.StatusBottomSheetDialogBinding
 import com.example.leadcrm.ui.adapters.StatusAdapter
+import com.example.leadcrm.ui.layouts.StatusItemLayout
 import com.example.leadcrm.ui.viewmodels.LeadsViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class StatusDialogFragment : BottomSheetDialogFragment() {
+class StatusDialogFragment(private val listener: StatusItemLayout.OnStatusSelectedListener) : BottomSheetDialogFragment() {
     private var _binding: StatusBottomSheetDialogBinding? = null
     private val binding get() = _binding!!
     private val viewModel: LeadsViewModel by activityViewModels()
-    private val statusAdapter: StatusAdapter by lazy { StatusAdapter(requireContext()) }
+    private val statusAdapter: StatusAdapter by lazy { StatusAdapter(requireContext(), listener) }
 
     override fun onCreateView(
         inflater: LayoutInflater,

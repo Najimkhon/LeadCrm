@@ -13,7 +13,8 @@ import com.example.leadcrm.ui.layouts.CountryItemLayout
 import com.example.leadcrm.ui.layouts.StatusItemLayout
 
 class StatusAdapter(
-    val context: Context
+    val context: Context,
+    private val listener: StatusItemLayout.OnStatusSelectedListener
 ) : RecyclerView.Adapter<StatusAdapter.StatusViewHolder>() {
 
     val diffCallback = object : DiffUtil.ItemCallback<StatusQuery.FetchLeadStatusType>() {
@@ -36,7 +37,7 @@ class StatusAdapter(
     val differ = AsyncListDiffer(this, diffCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatusViewHolder {
-        return StatusViewHolder(StatusItemLayout(context))
+        return StatusViewHolder(StatusItemLayout(context, listener))
     }
 
     override fun getItemCount(): Int {

@@ -3,12 +3,14 @@ package com.example.leadcrm.ui.fragments
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
+import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.apollographql.apollo3.api.Optional
@@ -19,28 +21,27 @@ import com.example.leadcrm.base.BaseFragment
 import com.example.leadcrm.databinding.FragmentLeadProfileBinding
 import com.example.leadcrm.ui.dialogs.CountriesDialogFragment
 import com.example.leadcrm.ui.dialogs.LanguagesDialogFragment
+import com.example.leadcrm.ui.dialogs.StatusDialogFragment
 import com.example.leadcrm.ui.layouts.CountryItemLayout
+import com.example.leadcrm.ui.layouts.StatusItemLayout
 import com.example.leadcrm.ui.viewmodels.LeadsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LeadProfileFragment :
     BaseFragment<FragmentLeadProfileBinding>(FragmentLeadProfileBinding::inflate),
-    CountryItemLayout.OnItemClickListener, LanguagesDialogFragment.OnDialogClosedListener  {
+    CountryItemLayout.OnItemClickListener, LanguagesDialogFragment.OnDialogClosedListener,
+    StatusItemLayout.OnStatusSelectedListener {
     private val args: LeadProfileFragmentArgs by navArgs()
     private val viewModel: LeadsViewModel by viewModels()
     private val countriesDialog = CountriesDialogFragment(this)
     private var selectedCountryId = -1
     private var selectedLanguages = mutableListOf<Int>()
     private val languagesDialog = LanguagesDialogFragment(this)
+    private val statusDialog = StatusDialogFragment(this)
+    private var statusIdLiveData = MutableLiveData(1)
 
     override fun setListeners() {
-        binding.generaInfoForm.btnEditGeneralInfo.setOnClickListener {
-            isEditableMode(true)
-        }
-        binding.generaInfoForm.btnSaveGeneralInfo.setOnClickListener {
-            isEditableMode(false)
-        }
 
         binding.btnEditName.setOnClickListener {
             isNameEditable(true)
@@ -51,16 +52,25 @@ class LeadProfileFragment :
             updateLead(args.leadId)
         }
 
+        binding.generaInfoForm.btnSaveGeneralInfo.setOnClickListener {
+            updateLead(args.leadId)
+            Toast.makeText(requireContext(), "Changes are saved!", Toast.LENGTH_SHORT).show()
+        }
+
         binding.btnBack.setOnClickListener {
             findNavController().popBackStack()
         }
 
-        binding.generaInfoForm.etCountry.setOnClickListener{
+        binding.generaInfoForm.etCountry.setOnClickListener {
             countriesDialog.show(childFragmentManager, "CountriesDialog")
         }
 
-        binding.generaInfoForm.etLanguage.setOnClickListener{
+        binding.generaInfoForm.etLanguage.setOnClickListener {
             languagesDialog.show(childFragmentManager, "LanguagesDialog")
+        }
+
+        binding.progressBar.tvOptionsLabel.setOnClickListener {
+            statusDialog.show(childFragmentManager, "StatusDialog")
         }
     }
 
@@ -68,8 +78,10 @@ class LeadProfileFragment :
         viewModel.getLead(FetchLeadInput(args.leadId))
 
         viewModel.getLeadLiveData.observe(viewLifecycleOwner) {
+            println("VIEWMODEL VALUE: ===================================${it?.data?.status?.id}")
 
             binding.progressBar.apply {
+                statusIdLiveData.value = it?.data?.status?.id ?: 1
                 tvOptionsLabel.text = it?.data?.status?.title
                 setProgressGraph(it?.data?.status?.step, it?.data?.status?.stepsCount)
                 cvStatusColor.setCardBackgroundColor(Color.parseColor(it?.data?.status?.color))
@@ -97,7 +109,7 @@ class LeadProfileFragment :
                 etProperty.setText(lead?.propertyType?.title ?: "")
                 etNationality.setText(lead?.nationality?.title ?: "")
                 val country = lead?.country
-                if (country!= null){
+                if (country != null) {
                     etCountry.setText(country.title)
                     selectedCountryId = it.data.country?.id ?: -1
                 }
@@ -110,35 +122,81 @@ class LeadProfileFragment :
             binding.buttonsChain.apply {
                 val contacts = it?.data?.contacts?.data
                 contacts?.forEach {
-                    if (it.emailContact?.title != null){
-                        btnMail.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.icon_purple_bg))
-                        tvMailLabel.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
+                    if (it.emailContact?.title != null) {
+                        btnMail.setBackgroundDrawable(
+                            ContextCompat.getDrawable(
+                                requireContext(), R.drawable.icon_purple_bg
+                            )
+                        )
+                        tvMailLabel.setTextColor(
+                            ContextCompat.getColor(
+                                requireContext(), R.color.blue
+                            )
+                        )
                         setMailListener(it.emailContact.title)
-                    }else{
-                        btnMail.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.icon_purple_disabled_bg))
-                        tvMailLabel.setTextColor(ContextCompat.getColor(requireContext(), R.color.disabled_button_icon_color))
+                    } else {
+                        btnMail.setBackgroundDrawable(
+                            ContextCompat.getDrawable(
+                                requireContext(), R.drawable.icon_purple_disabled_bg
+                            )
+                        )
+                        tvMailLabel.setTextColor(
+                            ContextCompat.getColor(
+                                requireContext(), R.color.disabled_button_icon_color
+                            )
+                        )
                     }
-                    if (it.phoneContact?.title != null){
-                        btnCall.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.icon_purple_bg))
-                        tvCallLabel.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
-                        btnMessage.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.icon_purple_bg))
-                        tvMessageLabel.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
+                    if (it.phoneContact?.title != null) {
+                        btnCall.setBackgroundDrawable(
+                            ContextCompat.getDrawable(
+                                requireContext(), R.drawable.icon_purple_bg
+                            )
+                        )
+                        tvCallLabel.setTextColor(
+                            ContextCompat.getColor(
+                                requireContext(), R.color.blue
+                            )
+                        )
+                        btnMessage.setBackgroundDrawable(
+                            ContextCompat.getDrawable(
+                                requireContext(), R.drawable.icon_purple_bg
+                            )
+                        )
+                        tvMessageLabel.setTextColor(
+                            ContextCompat.getColor(
+                                requireContext(), R.color.blue
+                            )
+                        )
                         setPhoneListener(it.phoneContact.title)
-                    }else{
-                        btnCall.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.icon_purple_disabled_bg))
-                        tvCallLabel.setTextColor(ContextCompat.getColor(requireContext(), R.color.disabled_button_icon_color))
-                        btnMessage.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.icon_purple_disabled_bg))
-                        tvMessageLabel.setTextColor(ContextCompat.getColor(requireContext(), R.color.disabled_button_icon_color))
+                    } else {
+                        btnCall.setBackgroundDrawable(
+                            ContextCompat.getDrawable(
+                                requireContext(), R.drawable.icon_purple_disabled_bg
+                            )
+                        )
+                        tvCallLabel.setTextColor(
+                            ContextCompat.getColor(
+                                requireContext(), R.color.disabled_button_icon_color
+                            )
+                        )
+                        btnMessage.setBackgroundDrawable(
+                            ContextCompat.getDrawable(
+                                requireContext(), R.drawable.icon_purple_disabled_bg
+                            )
+                        )
+                        tvMessageLabel.setTextColor(
+                            ContextCompat.getColor(
+                                requireContext(), R.color.disabled_button_icon_color
+                            )
+                        )
                     }
                 }
             }
         }
-
-        isEditableMode(false)
     }
 
-    private fun setMailListener(email: String){
-        binding.buttonsChain.btnMail.setOnClickListener{
+    private fun setMailListener(email: String) {
+        binding.buttonsChain.btnMail.setOnClickListener {
             val intent = Intent(Intent.ACTION_SENDTO).apply {
                 data = Uri.parse("mailto:$email")
             }
@@ -150,7 +208,7 @@ class LeadProfileFragment :
         }
     }
 
-    private fun setPhoneListener(phoneNumber: String){
+    private fun setPhoneListener(phoneNumber: String) {
         binding.buttonsChain.btnCall.setOnClickListener {
             val intent = Intent(Intent.ACTION_DIAL).apply {
                 data = Uri.parse("tel:$phoneNumber")
@@ -163,7 +221,7 @@ class LeadProfileFragment :
             }
         }
 
-        binding.buttonsChain.btnMessage.setOnClickListener{
+        binding.buttonsChain.btnMessage.setOnClickListener {
 
             val smsIntent = Intent(Intent.ACTION_SENDTO).apply {
                 data = Uri.parse("smsto:$phoneNumber")
@@ -172,29 +230,6 @@ class LeadProfileFragment :
                 startActivity(smsIntent)
             } else {
                 Toast.makeText(requireContext(), "No SMS app found", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    private fun isEditableMode(isEditable: Boolean) {
-        binding.apply {
-            generaInfoForm.apply {
-                etAdSource.isEditable(isEditable)
-                etBirthday.isEditable(isEditable)
-                etBudget.isEditable(isEditable)
-                etChannel.isEditable(isEditable)
-                etCity.isEditable(isEditable)
-                etLeadType.isEditable(isEditable)
-                etWebSource.isEditable(isEditable)
-                etProperty.isEditable(isEditable)
-                etNationality.isEditable(isEditable)
-                etBirthday.isEditable(isEditable)
-                etBudget.isEditable(isEditable)
-                etCityProperty.isEditable(isEditable)
-                etChannelProperty.isEditable(isEditable)
-                etLanguageProperty.isEditable(isEditable)
-                btnEditGeneralInfo.isVisible = !isEditable
-                btnSaveGeneralInfo.isVisible = isEditable
             }
         }
     }
@@ -214,15 +249,27 @@ class LeadProfileFragment :
     }
 
     private fun updateLead(leadId: Int) {
-        val updateLeadInput = UpdateLeadInput(
-            leadId = leadId,
-            firstName = Optional.Present(binding.etName.text.toString()),
-            lastName = Optional.Present(binding.etLastName.text.toString()),
-            countryId = Optional.Present(selectedCountryId),
-            languageIds = Optional.Present(selectedLanguages)
-        )
-        viewModel.updateLead(updateLeadInput)
-        viewModel.getLead(FetchLeadInput(args.leadId))
+        try {
+            lateinit var updateLeadInput: UpdateLeadInput
+            statusIdLiveData.observe(viewLifecycleOwner) {
+                updateLeadInput = UpdateLeadInput(
+                    leadId = leadId,
+                    firstName = Optional.Present(binding.etName.text.toString()),
+                    lastName = Optional.Present(binding.etLastName.text.toString()),
+                    countryId = Optional.Present(selectedCountryId),
+                    languageIds = Optional.Present(selectedLanguages),
+                    statusId = Optional.Present(it)
+                )
+            }
+
+            viewModel.updateLead(updateLeadInput)
+            viewModel.getLead(FetchLeadInput(args.leadId))
+
+
+        } catch (e: Exception) {
+            Log.e("UpdateLead", "Error: ${e.message}", e)
+        }
+
     }
 
     private fun setProgressGraph(completedSteps: Int?, totalSteps: Int?) {
@@ -264,4 +311,11 @@ class LeadProfileFragment :
             binding.generaInfoForm.etLanguage.setDeselected()
         }
     }
+
+    override fun onStatusClicked(statusId: Int, title: String) {
+        statusIdLiveData.value = statusId
+        statusDialog.dismiss()
+        updateLead(args.leadId)
+    }
+
 }

@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:background="@drawable/progress_bar_bg"
     android:paddingHorizontal="14dp"
-    android:paddingTop="14dp">
+    android:paddingTop="14dp"
+    android:id="@+id/itemView">
 
     <TextView
         android:id="@+id/tvStatusLabel"
