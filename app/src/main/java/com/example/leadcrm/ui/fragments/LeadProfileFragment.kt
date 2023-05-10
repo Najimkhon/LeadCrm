@@ -3,6 +3,7 @@ package com.example.leadcrm.ui.fragments
 import android.graphics.Color
 import android.view.View
 import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -36,14 +37,22 @@ class LeadProfileFragment :
             isNameEditable(false)
         }
 
-        binding.btnBack.setOnClickListener{
+        binding.btnBack.setOnClickListener {
             findNavController().popBackStack()
         }
     }
 
     override fun prepareUI() {
         viewModel.getLead(FetchLeadInput(args.leadId))
-        viewModel.getLeadLiveData.observe(this) {
+
+        viewModel.getLeadLiveData.observe(viewLifecycleOwner) {
+
+            binding.progressBar.apply {
+                tvOptionsLabel.text = it?.data?.status?.title
+                setProgressGraph(it?.data?.status?.step, it?.data?.status?.stepsCount)
+                cvStatusColor.setCardBackgroundColor(Color.parseColor(it?.data?.status?.color))
+            }
+
             binding.apply {
                 val name = it?.data?.firstName
                 val lastName = it?.data?.lastName
@@ -52,17 +61,10 @@ class LeadProfileFragment :
                 tvId.text = "ID: ${it?.data?.id}"
                 tvInitials.text = name?.get(0).toString() + lastName?.get(0).toString()
             }
-            binding.progressBar.apply {
-                tvOptionsLabel.text = it?.data?.status?.title
-                setProgressGraph(it?.data?.status?.step, it?.data?.status?.stepsCount)
-                cvStatusColor.setCardBackgroundColor(Color.parseColor(it?.data?.status?.color))
-            }
-        }
 
-        binding.generaInfoForm.apply {
-            etCountry.isEditable(false)
-            etLanguage.isEditable(false)
-            viewModel.getLeadLiveData.observe(viewLifecycleOwner) {
+            binding.generaInfoForm.apply {
+                etCountry.isEditable(false)
+                etLanguage.isEditable(false)
                 val lead = it?.data
                 etLanguage.setText(lead?.languages?.get(0)?.title.toString())
                 etAdSource.setText(lead?.adSource?.title ?: "")
@@ -72,9 +74,27 @@ class LeadProfileFragment :
                 etProperty.setText(lead?.propertyType?.title ?: "")
                 etNationality.setText(lead?.nationality?.title ?: "")
             }
+
+            binding.buttonsChain.apply {
+                val contacts = it?.data?.contacts?.data
+                contacts?.forEach {
+                    if (it.emailContact?.title != null){
+                        btnMail.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.icon_purple_bg))
+                        tvMailLabel.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
+                    }else{
+                        btnMail.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.icon_purple_disabled_bg))
+                        tvMailLabel.setTextColor(ContextCompat.getColor(requireContext(), R.color.disabled_button_icon_color))
+                    }
+                    if (it.phoneContact?.title != null){
+                        btnCall.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.icon_purple_bg))
+                        tvCallLabel.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
+                    }else{
+                        btnCall.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.icon_purple_disabled_bg))
+                        tvCallLabel.setTextColor(ContextCompat.getColor(requireContext(), R.color.disabled_button_icon_color))
+                    }
+                }
+            }
         }
-
-
 
         isEditableMode(false)
     }
@@ -116,7 +136,7 @@ class LeadProfileFragment :
         return (dp * scale + 0.5f).toInt()
     }
 
-    private fun updateLead(){
+    private fun updateLead() {
 
     }
 
