@@ -4,6 +4,7 @@ import com.apollographql.apollo3.ApolloClient
 import com.example.graphql.*
 import com.example.graphql.type.CreateLeadInput
 import com.example.graphql.type.FetchLeadInput
+import com.example.graphql.type.UpdateLeadInput
 import com.example.leadcrm.domain.LeadsClient
 import javax.inject.Inject
 
@@ -60,5 +61,13 @@ class ApolloLeadsClient @Inject constructor(
             .execute()
             .data
             ?.fetchLead
+    }
+
+    override suspend fun updateLead(updatedLead: UpdateLeadInput): UpdateLeadMutation.UpdateLead? {
+        return apolloClient
+            .mutation(UpdateLeadMutation(updatedLead))
+            .execute()
+            .data
+            ?.updateLead
     }
 }

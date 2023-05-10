@@ -116,6 +116,10 @@ class LeadProfileFragment :
         return (dp * scale + 0.5f).toInt()
     }
 
+    private fun updateLead(){
+
+    }
+
     private fun setProgressGraph(completedSteps: Int?, totalSteps: Int?) {
         binding.progressBar.progressBlocksContainer.removeAllViews()
         if (completedSteps != null && totalSteps != null) {

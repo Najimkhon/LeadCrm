@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.graphql.*
 import com.example.graphql.type.CreateLeadInput
 import com.example.graphql.type.FetchLeadInput
+import com.example.graphql.type.UpdateLeadInput
 import com.example.leadcrm.domain.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +21,8 @@ class LeadsViewModel @Inject constructor(
     private val getStatusListUseCase: GetStatusListUseCase,
     private val getLanguagesUseCase: GetLanguagesUseCase,
     private val createLeadUseCase: CreateLeadUseCase,
-    private val getLeadUseCase: FetchLeadUseCase
+    private val getLeadUseCase: FetchLeadUseCase,
+    private val updateLeadUseCase: UpdateLeadUseCase
 ) : ViewModel() {
 
     private val _leadsLiveData = MutableLiveData<LeadsQuery.FetchLeads>()
@@ -108,4 +110,16 @@ class LeadsViewModel @Inject constructor(
             }
         }
     }
+
+    fun updateLead(updatedLead: UpdateLeadInput){
+        viewModelScope.launch {
+            try {
+                val response = updateLeadUseCase.execute(updatedLead)
+                Log.d("UpdateLead", "Success $response")
+            } catch (e: Exception) {
+                Log.e("UpdateLead", "Error: ${e.message}", e)
+            }
+        }
+    }
+
 }
