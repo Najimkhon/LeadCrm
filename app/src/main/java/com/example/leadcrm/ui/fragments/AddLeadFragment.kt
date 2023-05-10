@@ -64,8 +64,7 @@ class AddLeadFragment : BaseFragment<FragmentAddLeadBinding>(FragmentAddLeadBind
                     lastName = Optional.Present(binding.etLastName.getText())
                 )
             }
-            println("THE NEW LEAD: " + newLead)
-            //viewModel.createLead(newLead)
+            viewModel.createLead(newLead)
             showState()
             findNavController().popBackStack()
         } else {

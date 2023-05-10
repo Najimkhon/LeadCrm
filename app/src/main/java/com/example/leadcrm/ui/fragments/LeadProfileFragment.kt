@@ -15,14 +15,22 @@ import com.example.graphql.type.FetchLeadInput
 import com.example.leadcrm.R
 import com.example.leadcrm.base.BaseFragment
 import com.example.leadcrm.databinding.FragmentLeadProfileBinding
+import com.example.leadcrm.ui.dialogs.CountriesDialogFragment
+import com.example.leadcrm.ui.dialogs.LanguagesDialogFragment
+import com.example.leadcrm.ui.layouts.CountryItemLayout
 import com.example.leadcrm.ui.viewmodels.LeadsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LeadProfileFragment :
-    BaseFragment<FragmentLeadProfileBinding>(FragmentLeadProfileBinding::inflate) {
+    BaseFragment<FragmentLeadProfileBinding>(FragmentLeadProfileBinding::inflate),
+    CountryItemLayout.OnItemClickListener, LanguagesDialogFragment.OnDialogClosedListener  {
     private val args: LeadProfileFragmentArgs by navArgs()
     private val viewModel: LeadsViewModel by viewModels()
+    private val countriesDialog = CountriesDialogFragment(this)
+    private var selectedCountryId = -1
+    private var selectedLanguages = mutableListOf<Int>()
+    private val languagesDialog = LanguagesDialogFragment(this)
 
     override fun setListeners() {
         binding.generaInfoForm.btnEditGeneralInfo.setOnClickListener {
@@ -42,6 +50,14 @@ class LeadProfileFragment :
 
         binding.btnBack.setOnClickListener {
             findNavController().popBackStack()
+        }
+
+        binding.generaInfoForm.etCountry.setOnClickListener{
+            countriesDialog.show(childFragmentManager, "CountriesDialog")
+        }
+
+        binding.generaInfoForm.etLanguage.setOnClickListener{
+            languagesDialog.show(childFragmentManager, "LanguagesDialog")
         }
     }
 
@@ -66,8 +82,6 @@ class LeadProfileFragment :
             }
 
             binding.generaInfoForm.apply {
-                etCountry.isEditable(false)
-                etLanguage.isEditable(false)
                 val lead = it?.data
                 etLanguage.setText(lead?.languages?.get(0)?.title.toString())
                 etAdSource.setText(lead?.adSource?.title ?: "")
@@ -76,6 +90,12 @@ class LeadProfileFragment :
                 etChannel.setText(lead?.channelSource?.title ?: "")
                 etProperty.setText(lead?.propertyType?.title ?: "")
                 etNationality.setText(lead?.nationality?.title ?: "")
+                val country = lead?.country?.title
+                if (country!= null){
+                    etCountry.setText(country)
+                }
+
+
             }
 
             binding.buttonsChain.apply {
@@ -208,6 +228,25 @@ class LeadProfileFragment :
                 }
                 binding.progressBar.progressBlocksContainer.addView(stepView)
             }
+        }
+    }
+
+    override fun onItemClicked(countryId: Int, countryTitle: String) {
+        selectedCountryId = countryId
+        binding.generaInfoForm.etCountry.setSelected()
+        binding.generaInfoForm.etCountry.setText(countryTitle)
+        countriesDialog.dismiss()
+    }
+
+    override fun onDialogClosed(selectedLanguages: List<Int>) {
+        this.selectedLanguages.clear()
+        this.selectedLanguages.addAll(selectedLanguages)
+        if (this.selectedLanguages.size > 0) {
+            binding.generaInfoForm.etLanguage.setText("Selected")
+            binding.generaInfoForm.etLanguage.setSelected()
+        } else {
+            binding.generaInfoForm.etLanguage.setText("Language")
+            binding.generaInfoForm.etLanguage.setDeselected()
         }
     }
 }

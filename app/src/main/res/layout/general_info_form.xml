@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
+
     <TextView
         android:id="@+id/tvGeneralInfo"
         android:layout_width="wrap_content"
@@ -28,15 +29,15 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSaveGeneralInfo"
+        style="@style/SecondaryButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="26dp"
         android:layout_marginRight="10dp"
-        style="@style/SecondaryButtonStyle"
         android:text="Save"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@id/tvGeneralInfo"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tvGeneralInfo"
-        android:visibility="visible"/>
+        app:layout_constraintTop_toTopOf="@id/tvGeneralInfo" />
 
     <com.example.leadcrm.ui.customviews.EditTextCustomView
         android:id="@+id/etLeadType"
@@ -62,14 +63,14 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvGeneralInfo" />
 
-    <com.example.leadcrm.ui.customviews.EditTextCustomView
+    <com.example.leadcrm.ui.customviews.TextViewCustomView
         android:id="@+id/etCountry"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="5dp"
-        app:hint="Unknown"
-        app:label="Country"
+        app:CustomTvLabel="Country"
+        app:CustomTvText="Unknown"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/etWebSource"
         app:layout_constraintTop_toBottomOf="@id/etAdSource" />
@@ -110,14 +111,14 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etCountry" />
 
-    <com.example.leadcrm.ui.customviews.EditTextCustomView
+    <com.example.leadcrm.ui.customviews.TextViewCustomView
         android:id="@+id/etLanguage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="5dp"
-        app:hint="Unknown"
-        app:label="Language"
+        app:CustomTvLabel="Language"
+        app:CustomTvText="Unknown"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/etProperty"
         app:layout_constraintTop_toBottomOf="@id/etCity" />
