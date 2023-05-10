@@ -88,9 +88,13 @@ class LeadProfileFragment :
                     if (it.phoneContact?.title != null){
                         btnCall.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.icon_purple_bg))
                         tvCallLabel.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
+                        btnMessage.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.icon_purple_bg))
+                        tvMessageLabel.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
                     }else{
                         btnCall.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.icon_purple_disabled_bg))
                         tvCallLabel.setTextColor(ContextCompat.getColor(requireContext(), R.color.disabled_button_icon_color))
+                        btnMessage.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.icon_purple_disabled_bg))
+                        tvMessageLabel.setTextColor(ContextCompat.getColor(requireContext(), R.color.disabled_button_icon_color))
                     }
                 }
             }
