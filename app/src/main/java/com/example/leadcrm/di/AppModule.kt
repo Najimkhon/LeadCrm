@@ -4,6 +4,7 @@ import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.network.okHttpClient
 import com.example.leadcrm.data.ApolloLeadsClient
 import com.example.leadcrm.domain.*
+import com.example.leadcrm.utils.Constants.BASE_URL
 import com.example.leadcrm.utils.Constants.GRAPHQL_TOKEN
 import dagger.Module
 import dagger.Provides
@@ -32,7 +33,7 @@ object AppModule {
             .build()
 
         return ApolloClient.Builder()
-            .serverUrl("http://54.246.238.84:3000/graphql")
+            .serverUrl(BASE_URL)
             .okHttpClient(okHttpClient)
             .build()
     }
